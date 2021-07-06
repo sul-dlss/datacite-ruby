@@ -4,7 +4,7 @@ RSpec.describe Datacite::Client do
   subject(:client) { described_class.new(username: "foo", password: "bar") }
 
   describe "#autogenerate_doi" do
-    subject(:generate) { client.autogenerate_doi }
+    subject(:generate) { client.autogenerate_doi(prefix: "10.5438") }
 
     context "when the response is successful" do
       before do
