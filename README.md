@@ -1,8 +1,6 @@
-# Datacite
+# Datacite Ruby Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/datacite`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is a Ruby client for interfacing with the DataCite REST API. https://support.datacite.org/docs/api
 
 ## Installation
 
@@ -22,7 +20,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+client = Datacite::Client.new(username: "foo", password: "bar")
+result = client.autogenerate_doi
+result.either(
+  -> response { response.doi },
+  -> response { raise("Something went wrong", response.status) }
+)
+```
 
 ## Development
 
@@ -32,4 +37,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/datacite.
+Bug reports and pull requests are welcome on GitHub at https://github.com/sul-dlss/datacite-ruby.

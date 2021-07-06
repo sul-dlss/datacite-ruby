@@ -6,8 +6,8 @@ loader = Zeitwerk::Loader.new
 loader.tag = File.basename(__FILE__, ".rb")
 loader.inflector = Zeitwerk::GemInflector.new(__FILE__)
 loader.push_dir(__dir__)
+loader.setup
 
 module Datacite
   class Error < StandardError; end
-  # Your code goes here...
 end
