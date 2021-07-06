@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
-require_relative "datacite/version"
+require "zeitwerk"
+
+loader = Zeitwerk::Loader.new
+loader.tag = File.basename(__FILE__, ".rb")
+loader.inflector = Zeitwerk::GemInflector.new(__FILE__)
+loader.push_dir(__dir__)
 
 module Datacite
   class Error < StandardError; end
