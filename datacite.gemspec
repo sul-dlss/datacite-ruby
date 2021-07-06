@@ -11,9 +11,9 @@ Gem::Specification.new do |spec|
   spec.summary       = "A Ruby client library for the DataCite REST API "
   spec.description   = "See https://support.datacite.org/docs/api"
   spec.homepage      = "https://github.com/sul-dlss/datacite-ruby"
-  spec.required_ruby_version = ">= 2.4.0"
+  spec.required_ruby_version = ">= 2.7.0"
 
-  spec.metadata["allowed_push_host"] = 'https://rubygems.org'
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
@@ -30,7 +30,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "faraday", "~> 1.4"
   spec.add_dependency "zeitwerk", "~> 2.4"
-
-  # For more information and examples about making a new gem, checkout our
-  # guide at: https://bundler.io/guides/creating_gem.html
 end
