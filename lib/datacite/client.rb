@@ -2,7 +2,6 @@
 
 require "faraday"
 require "faraday_middleware"
-require "active_support"
 require "dry/monads"
 
 module Datacite
