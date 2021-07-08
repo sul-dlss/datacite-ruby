@@ -15,5 +15,3 @@ gem "rubocop-rake", "~> 0.6.0"
 gem "rubocop-rspec", "~> 2.4"
 
 gem "webmock", "~> 3.13"
-
-gem "faraday_middleware", "~> 1.0"
