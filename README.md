@@ -1,5 +1,7 @@
 # Datacite Ruby Client
 
+[![Gem Version](https://badge.fury.io/rb/datacite.svg)](https://badge.fury.io/rb/datacite)
+
 This is a Ruby client for interfacing with the DataCite REST API. https://support.datacite.org/docs/api
 
 ## Installation
