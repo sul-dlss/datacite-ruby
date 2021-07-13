@@ -22,9 +22,29 @@ Or install it yourself as:
 
 ## Usage
 
+### Initialize the client
 ```ruby
-client = Datacite::Client.new(username: "foo", password: "bar")
-result = client.autogenerate_doi
+client = Datacite::Client.new(username: "foo",
+                              password: "bar",
+                              host: "api.test.datacite.org")
+```
+
+### Create a Draft DOI
+
+```ruby
+result = client.register_doi(prefix: '10.0001', suffix: 'bc123df4567')
+
+result.either(
+  -> response { response.doi },
+  -> response { raise("Something went wrong", response.status) }
+)
+```
+
+#### Auto-generated DOI's
+
+```ruby
+result = client.autogenerate_doi(prefix: '10.0001')
+
 result.either(
   -> response { response.doi },
   -> response { raise("Something went wrong", response.status) }
