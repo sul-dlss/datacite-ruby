@@ -3,6 +3,7 @@
 require "faraday"
 require "faraday_middleware"
 require "dry/monads"
+require "json_schema"
 
 module Datacite
   # The connection to DataCite API
@@ -38,6 +39,22 @@ module Datacite
     def register_doi(prefix:, suffix:)
       request_body = RegisterDoiRequestBody.new(prefix: prefix, suffix: suffix).to_json
       register(request_body)
+    end
+
+    # Update a DOI
+    # @param [String] id
+    # @param [String] value
+    # @returns [Dry::Monads::Result]
+    def update(id:, attributes:)
+      Validator.validate!(attributes)
+      request_body = {
+        data: {
+          attributes: attributes
+        }
+      }
+
+      response = conn.put("/dois/#{id}", request_body.to_json)
+      response.success? ? Success(Response.new(response)) : Failure(response)
     end
 
     private

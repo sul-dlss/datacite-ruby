@@ -51,6 +51,28 @@ result.either(
 )
 ```
 
+### Update DOI's
+
+```ruby
+# See https://support.datacite.org/reference/dois-2#put_dois-id for the attributes
+attributes = {
+  relatedIdentifiers: [
+    {
+      relatedIdentifier: "https://doi.org/10.xxxx/xxxxx",
+      relatedIdentifierType: "DOI",
+      relationType: "References",
+      resourceTypeGeneral: "Dataset"
+    }
+  ]
+}
+result = client.update(id: '10.0001/bc123df4567', attributes: attributes)
+
+result.either(
+  -> response { response.doi },
+  -> response { raise("Something went wrong", response.status) }
+)
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
