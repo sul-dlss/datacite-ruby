@@ -79,6 +79,7 @@ This gem validates using a json schema from https://github.com/datacite/schema/b
 We've made the following changes:
   * relax the required fields (https://github.com/datacite/schema/issues/97)
   * add event property (https://github.com/datacite/schema/issues/100)
+  * add url property (https://github.com/datacite/schema/issues/101)
 
 ## Development
 
