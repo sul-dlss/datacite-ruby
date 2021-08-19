@@ -292,6 +292,7 @@ RSpec.describe Datacite::Client do
   describe "#update" do
     let(:attributes) do
       {
+        "event" => "publish",
         "relatedIdentifiers" => [
           {
             "relatedIdentifier" => "https://doi.org/10.xxxx/xxxxx",
@@ -304,7 +305,7 @@ RSpec.describe Datacite::Client do
     end
     let(:request_body) do
       <<~JSON
-        {"data":{"attributes":{"relatedIdentifiers":[{"relatedIdentifier":"https://doi.org/10.xxxx/xxxxx","relatedIdentifierType":"DOI","relationType":"References","resourceTypeGeneral":"Dataset"}]}}}
+        {"data":{"attributes":{"event":"publish","relatedIdentifiers":[{"relatedIdentifier":"https://doi.org/10.xxxx/xxxxx","relatedIdentifierType":"DOI","relationType":"References","resourceTypeGeneral":"Dataset"}]}}}
       JSON
     end
     subject(:generate) { client.update(id: "10.5438/bc123df4567", attributes: attributes) }
