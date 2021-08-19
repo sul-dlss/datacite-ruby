@@ -216,6 +216,10 @@
     "type": "object",
 
     "properties": {
+        "event": {
+            "type": "string",
+            "enum": ["publish", "register", "hide"]
+        },
         "types": {
             "type": "object",
             "properties": {
