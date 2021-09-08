@@ -19,7 +19,7 @@ module Datacite
         headers: headers
       ) do |conn|
         conn.request :json
-        conn.basic_auth(username, password)
+        conn.request(:basic_auth, username, password)
         conn.response :json
       end
     end
