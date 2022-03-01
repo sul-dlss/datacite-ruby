@@ -14,4 +14,5 @@ gem "rubocop", "~> 1.7"
 gem "rubocop-rake", "~> 0.6.0"
 gem "rubocop-rspec", "~> 2.4"
 
+gem "byebug"
 gem "webmock", "~> 3.13"

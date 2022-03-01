@@ -16,7 +16,7 @@ RSpec.describe Datacite::Client do
               "Content-Type" => "application/vnd.api+json"
             }
           )
-          .to_return(status: 200, body: response, headers: {})
+          .to_return(status: 200, body: response, headers: { "Content-Type" => "application/json" })
       end
 
       let(:response) do
@@ -128,7 +128,7 @@ RSpec.describe Datacite::Client do
               "Content-Type" => "application/vnd.api+json"
             }
           )
-          .to_return(status: 404, body: response, headers: {})
+          .to_return(status: 404, body: response, headers: { "Content-Type" => "application/json" })
       end
 
       let(:response) do
@@ -159,7 +159,7 @@ RSpec.describe Datacite::Client do
               "Content-Type" => "application/vnd.api+json"
             }
           )
-          .to_return(status: 200, body: response, headers: {})
+          .to_return(status: 200, body: response, headers: { "Content-Type" => "application/json" })
       end
 
       let(:response) do
@@ -271,7 +271,7 @@ RSpec.describe Datacite::Client do
               "Content-Type" => "application/vnd.api+json"
             }
           )
-          .to_return(status: 404, body: response, headers: {})
+          .to_return(status: 404, body: response, headers: { "Content-Type" => "application/json" })
       end
 
       let(:response) do
@@ -320,7 +320,7 @@ RSpec.describe Datacite::Client do
             "Content-Type" => "application/vnd.api+json"
           }
         )
-        .to_return(status: status, body: response, headers: {})
+        .to_return(status: status, body: response, headers: { "Content-Type" => "application/json" })
     end
 
     context "when the request is invalid" do

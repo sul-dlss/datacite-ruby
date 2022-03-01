@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "faraday"
-require "faraday_middleware"
 require "dry/monads"
 require "json_schema"
 
@@ -19,7 +18,7 @@ module Datacite
         headers: headers
       ) do |conn|
         conn.request :json
-        conn.request(:basic_auth, username, password)
+        conn.request :authorization, :basic, username, password
         conn.response :json
       end
     end
