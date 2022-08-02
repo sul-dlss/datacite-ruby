@@ -475,6 +475,9 @@
         "schemaVersion": {
             "type": "string",
             "const": "http://datacite.org/schema/kernel-4"
+        },
+        "xml": {
+            "type": "string"
         }
     },
     "additionalProperties": false
