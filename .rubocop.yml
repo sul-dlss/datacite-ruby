@@ -1,9 +1,17 @@
+require: rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 2.7 # dor-service-app is < 3.0 due to fedora3
 
 Metrics/BlockLength:
   Exclude:
     - spec/**/*_spec.rb
+
+RSpec/MultipleExpectations:
+  Max: 5 # default 1
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
 
 Style/StringLiterals:
   Enabled: true
@@ -151,4 +159,33 @@ Style/NestedFileDirname: # new in 1.26
 Style/ObjectThen: # new in 1.28
   Enabled: true
 Style/RedundantInitialize: # new in 1.27
+  Enabled: true
+
+RSpec/BeEq: # new in 2.9.0
+  Enabled: true
+RSpec/BeNil: # new in 2.9.0
+  Enabled: true
+RSpec/ChangeByZero: # new in 2.11
+  Enabled: true
+RSpec/ClassCheck: # new in 2.13
+  Enabled: true
+RSpec/ExcessiveDocstringSpacing: # new in 2.5
+  Enabled: true
+RSpec/IdenticalEqualityAssertion: # new in 2.4
+  Enabled: true
+RSpec/NoExpectationExample: # new in 2.13
+  Enabled: true
+RSpec/SubjectDeclaration: # new in 2.5
+  Enabled: true
+RSpec/VerifiedDoubleReference: # new in 2.10.0
+  Enabled: true
+RSpec/Capybara/SpecificFinders: # new in 2.13
+  Enabled: true
+RSpec/Capybara/SpecificMatcher: # new in 2.12
+  Enabled: true
+RSpec/FactoryBot/SyntaxMethods: # new in 2.7
+  Enabled: true
+RSpec/Rails/AvoidSetupHook: # new in 2.4
+  Enabled: true
+RSpec/Rails/HaveHttpStatus: # new in 2.12
   Enabled: true
