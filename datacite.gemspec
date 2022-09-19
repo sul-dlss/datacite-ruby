@@ -33,4 +33,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency "json_schema", "~> 0.21.0"
   spec.add_dependency "zeitwerk", "~> 2.4"
   spec.metadata["rubygems_mfa_required"] = "true"
+
+  spec.add_development_dependency "byebug"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "rubocop", "~> 1.7"
+  spec.add_development_dependency "rubocop-rake", "~> 0.6.0"
+  spec.add_development_dependency "rubocop-rspec", "~> 2.4"
+  spec.add_development_dependency "webmock", "~> 3.13"
 end
