@@ -464,17 +464,17 @@ RSpec.describe Datacite::Client do
                      "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " \
                      "xsi:schemaLocation=\"http://datacite.org/schema/kernel-4
                      http://schema.datacite.org/meta/kernel-4/metadata.xsd\">" \
-          "<identifier identifierType=\"DOI\">10.5438/bc123df4567</identifier>"\
+          "<identifier identifierType=\"DOI\">10.5438/bc123df4567</identifier>" \
           "<creators><creator><creatorName>DataCite Metadata Working Group</creatorName></creator></creators>" \
           "<titles>" \
             "<title>DataCite Metadata Schema Documentation for the Publication and Citation of Research Data v4.0" \
           "</title></titles>" \
-          "<publisher>DataCite e.V.</publisher><publicationYear>2016</publicationYear>"\
+          "<publisher>DataCite e.V.</publisher><publicationYear>2016</publicationYear>" \
           "<resourceType resourceTypeGeneral=\"Text\">Documentation</resourceType>" \
           "<relatedIdentifiers>" \
             "<relatedIdentifier relatedIdentifierType=\"URL\" relationType=\"HasMetadata\"" \
               "relatedMetadataScheme=\"citeproc+json\" " \
-              "schemeURI=\"https://github.com/citation-style-language/schema/raw/master/csl-data.json\">"\
+              "schemeURI=\"https://github.com/citation-style-language/schema/raw/master/csl-data.json\">" \
               "https://data.datacite.org/application/citeproc+json/10.5072/example-full</relatedIdentifier>" \
             "<relatedIdentifier relatedIdentifierType=\"arXiv\" relationType=\"IsReviewedBy\" " \
               "resourceTypeGeneral=\"Text\">arXiv:0706.0001</relatedIdentifier>" \
