@@ -3,6 +3,7 @@ AllCops:
 
 Metrics/BlockLength:
   Exclude:
+    - datacite.gemspec
     - spec/**/*_spec.rb
 
 Style/StringLiterals:
