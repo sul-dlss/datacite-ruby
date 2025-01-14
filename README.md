@@ -35,7 +35,7 @@ client = Datacite::Client.new(username: "foo",
 result = client.register_doi(prefix: '10.0001', suffix: 'bc123df4567')
 
 result.either(
-  -> response { response.doi },
+  -> response { response },
   -> response { raise("Something went wrong", response.status) }
 )
 ```
