@@ -12,13 +12,13 @@ module Datacite
     # @param [String] username
     # @param [String] password
     # @param [String] host
-    def initialize(username:, password:, host: "api.test.datacite.org")
+    def initialize(username: nil, password: nil, host: "api.test.datacite.org")
       @conn = Faraday.new(
         url: "https://#{host}",
         headers: headers
       ) do |conn|
         conn.request :json
-        conn.request :authorization, :basic, username, password
+        conn.request :authorization, :basic, username, password if username
         conn.response :json
       end
     end
