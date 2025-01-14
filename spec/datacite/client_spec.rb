@@ -514,12 +514,15 @@ RSpec.describe Datacite::Client do
 
     before do
       stub_request(:head, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
+        .with(headers: {
+                "Authorization" => "Basic Zm9vOmJhcg=="
+              })
         .to_return(status: status)
     end
 
-    context "when the DOI exists" do
-      let(:status) { 200 }
+    let(:status) { 200 }
 
+    context "when the DOI exists" do
       it "returns true" do
         expect(result.value!).to be true
       end
@@ -538,6 +541,19 @@ RSpec.describe Datacite::Client do
 
       it "returns a failure" do
         expect(result).to be_failure
+      end
+    end
+
+    context "when no username or password provided" do
+      subject(:client) { described_class.new }
+
+      before do
+        stub_request(:head, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
+          .to_return(status: status).with { |request| request.headers["Authorization"].nil? }
+      end
+
+      it 'does not include the "Authorization" header' do
+        expect(result.value!).to be true
       end
     end
   end
