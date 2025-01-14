@@ -508,4 +508,37 @@ RSpec.describe Datacite::Client do
       end
     end
   end
+
+  describe "#exists?" do
+    subject(:result) { client.exists?(id: "10.5438/bc123df4567") }
+
+    before do
+      stub_request(:head, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
+        .to_return(status: status)
+    end
+
+    context "when the DOI exists" do
+      let(:status) { 200 }
+
+      it "returns true" do
+        expect(result.value!).to be true
+      end
+    end
+
+    context "when the DOI does not exists" do
+      let(:status) { 404 }
+
+      it "returns false" do
+        expect(result.value!).to be false
+      end
+    end
+
+    context "when the request is unsuccessful" do
+      let(:status) { 500 }
+
+      it "returns a failure" do
+        expect(result).to be_failure
+      end
+    end
+  end
 end

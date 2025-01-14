@@ -56,6 +56,21 @@ module Datacite
       response.success? ? Success(Response.new(response)) : Failure(response)
     end
 
+    # Determines if a DOI exists
+    # @param [String] id
+    # @returns [Dry::Monads::Result]
+    def exists?(id:)
+      response = conn.head("/dois/#{id}")
+      case response.status
+      when 200
+        Success(true)
+      when 404
+        Success(false)
+      else
+        Failure(response)
+      end
+    end
+
     private
 
     # @returns [Dry::Monads::Result]
