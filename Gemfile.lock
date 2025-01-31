@@ -21,6 +21,7 @@ GEM
       bigdecimal
       rexml
     diff-lcs (1.5.1)
+    docile (1.4.1)
     dry-core (1.1.0)
       concurrent-ruby (~> 1.0)
       logger
@@ -91,6 +92,12 @@ GEM
     rubocop-rspec_rails (2.29.1)
       rubocop (~> 1.61)
     ruby-progressbar (1.13.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.13.1)
+    simplecov_json_formatter (0.1.4)
     unicode-display_width (3.1.4)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
@@ -118,6 +125,7 @@ DEPENDENCIES
   rubocop (~> 1.7)
   rubocop-rake (~> 0.6.0)
   rubocop-rspec (~> 2.4)
+  simplecov
   webmock (~> 3.13)
 
 BUNDLED WITH

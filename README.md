@@ -1,6 +1,8 @@
-# Datacite Ruby Client
-
 [![Gem Version](https://badge.fury.io/rb/datacite.svg)](https://badge.fury.io/rb/datacite)
+[![CircleCI](https://circleci.com/gh/sul-dlss/datacite-ruby.svg?style=svg)](https://circleci.com/gh/sul-dlss/datacite-ruby)
+[![codecov](https://codecov.io/github/sul-dlss/datacite-ruby/graph/badge.svg?token=1FGARREHJN)](https://codecov.io/github/sul-dlss/datacite-ruby)
+
+# Datacite Ruby Client
 
 This is a Ruby client for interfacing with the DataCite REST API. https://support.datacite.org/docs/api
 
