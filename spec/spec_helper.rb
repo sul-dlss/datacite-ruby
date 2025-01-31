@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+require "simplecov"
+
+SimpleCov.start do
+  add_filter "spec"
+
+  if ENV["CI"]
+    require "simplecov_json_formatter"
+
+    formatter SimpleCov::Formatter::JSONFormatter
+  end
+end
+
 require "datacite"
 require "webmock/rspec"
 require "byebug"
