@@ -86,6 +86,17 @@ result.either(
 )
 ```
 
+### Get metadata for a DOI
+
+```ruby
+result = client.metadata(id: '10.0001/bc123df4567')
+
+result.either(
+  -> response { response },
+  -> response { raise("Something went wrong", response.status) }
+)
+```
+
 ### Validation
 This gem validates using a json schema from https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json
 
