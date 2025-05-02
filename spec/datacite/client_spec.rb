@@ -557,4 +557,49 @@ RSpec.describe Datacite::Client do
       end
     end
   end
+
+  describe "#metadata" do
+    subject(:result) { client.metadata(id: "10.5438/bc123df4567") }
+
+    before do
+      stub_request(:get, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
+        .with(headers: {
+                "Authorization" => "Basic Zm9vOmJhcg=="
+              })
+        .to_return(status: status, body: metadata.to_json, headers: { "Content-Type" => "application/json" })
+    end
+
+    let(:metadata) do
+      {
+        "data" => {
+          "id" => "10.5438/bc123df4567",
+          "type" => "dois"
+        }
+      }
+    end
+
+    let(:status) { 200 }
+
+    context "when the DOI exists" do
+      it "returns metadata" do
+        expect(result.value!).to eq metadata
+      end
+    end
+
+    context "when the DOI does not exists" do
+      let(:status) { 404 }
+
+      it "returns failure" do
+        expect(result).to be_failure
+      end
+    end
+
+    context "when the request is unsuccessful" do
+      let(:status) { 500 }
+
+      it "returns a failure" do
+        expect(result).to be_failure
+      end
+    end
+  end
 end

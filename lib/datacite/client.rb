@@ -71,6 +71,18 @@ module Datacite
       end
     end
 
+    # Fetches the metadata for a DOI
+    # @param [String] id
+    # @returns [Dry::Monads::Result(Hash)]
+    def metadata(id:)
+      response = conn.get("/dois/#{id}")
+      if response.success?
+        Success(response.body)
+      else
+        Failure(response)
+      end
+    end
+
     private
 
     # @returns [Dry::Monads::Result]
