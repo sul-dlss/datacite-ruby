@@ -2,7 +2,6 @@
 
 require "faraday"
 require "dry/monads"
-require "json_schema"
 
 module Datacite
   # The connection to DataCite API
@@ -45,7 +44,6 @@ module Datacite
     # @param [String] value
     # @returns [Dry::Monads::Result]
     def update(id:, attributes:)
-      Validator.validate!(attributes)
       request_body = {
         data: {
           attributes: attributes

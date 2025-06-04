@@ -324,21 +324,6 @@ RSpec.describe Datacite::Client do
         .to_return(status: status, body: response, headers: { "Content-Type" => "application/json" })
     end
 
-    context "when the request is invalid" do
-      let(:attributes) do
-        { "foo" => "bar" }
-      end
-
-      let(:status) { 200 }
-      let(:response) do
-        nil
-      end
-
-      it "can update the DOI" do
-        expect { generate }.to raise_error JsonSchema::AggregateError
-      end
-    end
-
     context "when the response is successful" do
       let(:status) { 200 }
 
@@ -455,56 +440,6 @@ RSpec.describe Datacite::Client do
         expect(generate.failure.body).to eq(
           "errors" => [{ "status" => "404", "title" => "The resource you are looking for doesn't exist." }]
         )
-      end
-    end
-
-    context "when the request is in xml" do
-      let(:xml) do
-        "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" \
-          "<resource xmlns=\"http://datacite.org/schema/kernel-4\" " \
-                     "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " \
-                     "xsi:schemaLocation=\"http://datacite.org/schema/kernel-4
-                     http://schema.datacite.org/meta/kernel-4/metadata.xsd\">" \
-          "<identifier identifierType=\"DOI\">10.5438/bc123df4567</identifier>" \
-          "<creators><creator><creatorName>DataCite Metadata Working Group</creatorName></creator></creators>" \
-          "<titles>" \
-            "<title>DataCite Metadata Schema Documentation for the Publication and Citation of Research Data v4.0" \
-          "</title></titles>" \
-          "<publisher>DataCite e.V.</publisher><publicationYear>2016</publicationYear>" \
-          "<resourceType resourceTypeGeneral=\"Text\">Documentation</resourceType>" \
-          "<relatedIdentifiers>" \
-            "<relatedIdentifier relatedIdentifierType=\"URL\" relationType=\"HasMetadata\"" \
-              "relatedMetadataScheme=\"citeproc+json\" " \
-              "schemeURI=\"https://github.com/citation-style-language/schema/raw/master/csl-data.json\">" \
-              "https://data.datacite.org/application/citeproc+json/10.5072/example-full</relatedIdentifier>" \
-            "<relatedIdentifier relatedIdentifierType=\"arXiv\" relationType=\"IsReviewedBy\" " \
-              "resourceTypeGeneral=\"Text\">arXiv:0706.0001</relatedIdentifier>" \
-          "</relatedIdentifiers> " \
-          "</resource>"
-      end
-      let(:attributes) do
-        {
-          "event" => "publish",
-          "url" => "https://purl.stanford.edu/st435qh3132",
-          "xml" => Base64.encode64(xml)
-        }
-      end
-
-      let(:json_xml_attribute) { JSON.generate(Base64.encode64(xml)) }
-
-      let(:request_body) do
-        <<~JSON
-          {"data":{"attributes":{"event":"publish","url":"https://purl.stanford.edu/st435qh3132","xml":#{json_xml_attribute}}}}
-        JSON
-      end
-
-      let(:status) { 200 }
-      let(:response) do
-        nil
-      end
-
-      it "can update the DOI" do
-        expect { generate }.not_to raise_error JsonSchema::AggregateError
       end
     end
   end

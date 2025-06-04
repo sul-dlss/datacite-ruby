@@ -97,15 +97,6 @@ result.either(
 )
 ```
 
-### Validation
-This gem validates using a json schema from https://github.com/datacite/schema/blob/master/source/json/kernel-4.3/datacite_4.3_schema.json
-
-We've made the following changes:
-  * relax the required fields (https://github.com/datacite/schema/issues/97)
-  * add event property (https://github.com/datacite/schema/issues/100)
-  * add url property (https://github.com/datacite/schema/issues/101)
-  * add xml property to support Datacite 4.4 xml schema via the api (https://github.com/datacite/schema/issues/99)
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
