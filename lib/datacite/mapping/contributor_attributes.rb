@@ -106,7 +106,7 @@ module Datacite
         datacite_creator(cocina_contributor).merge({ contributorType: contributor_type(cocina_contributor) })
       end
 
-      def personal_name(cocina_contributor) # rubocop:disable Metrics/MethodLength
+      def personal_name(cocina_contributor) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
         {
           nameType: 'Personal',
           nameIdentifiers: name_identifiers(cocina_contributor).presence,
@@ -147,7 +147,7 @@ module Datacite
         end
       end
 
-      def affiliations(cocina_contributor)
+      def affiliations(cocina_contributor) # rubocop:disable Metrics/MethodLength
         Array(cocina_contributor.affiliation).map do |affiliation|
           institution = affiliation.structuredValue.find { |descriptive_value| descriptive_value.identifier.present? }
           institution ||= affiliation # if no structured value with identifier, use the affiliation itself

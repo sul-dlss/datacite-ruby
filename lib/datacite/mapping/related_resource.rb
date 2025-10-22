@@ -55,7 +55,7 @@ module Datacite
       # @return [Hash,nil] Array of DataCite relatedIdentifier attributes, conforming to the expectations of HTTP PUT
       # request to DataCite or nil if blank
       #  see https://support.datacite.org/reference/dois-2#put_dois-id
-      def related_identifier_attributes
+      def related_identifier_attributes # rubocop:disable Metrics/MethodLength
         return if related_identifier_blank?
 
         {

@@ -242,7 +242,8 @@ RSpec.describe Datacite::Mapping::Request do
                                 {
                                   note: [
                                     {
-                                      value: 'Stanford University (Stanford, CA.). (2020). May 2020 dataset. yadda yadda.',
+                                      value: 'Stanford University (Stanford, CA.). (2020). May 2020 dataset. ' \
+                                             'yadda yadda.',
                                       type: 'preferred citation'
                                     }
                                   ]
