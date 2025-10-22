@@ -14,7 +14,7 @@ module Datacite
     def to_json(*_args)
       {
         data: {
-          type: "dois",
+          type: 'dois',
           attributes: {
             doi: "#{prefix}/#{suffix}"
           }
