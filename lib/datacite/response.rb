@@ -11,7 +11,7 @@ module Datacite
     attr_reader :body
 
     def doi
-      body.dig("data", "id")
+      body.dig('data', 'id')
     end
   end
 end

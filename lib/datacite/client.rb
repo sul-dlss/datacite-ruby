@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "faraday"
-require "dry/monads"
+require 'faraday'
+require 'dry/monads'
 
 module Datacite
   # The connection to DataCite API
@@ -11,7 +11,7 @@ module Datacite
     # @param [String] username
     # @param [String] password
     # @param [String] host
-    def initialize(username: nil, password: nil, host: "api.test.datacite.org")
+    def initialize(username: nil, password: nil, host: 'api.test.datacite.org')
       @conn = Faraday.new(
         url: "https://#{host}",
         headers: headers
@@ -85,14 +85,14 @@ module Datacite
 
     # @returns [Dry::Monads::Result]
     def register(request_body)
-      response = conn.post("/dois", request_body)
+      response = conn.post('/dois', request_body)
       response.success? ? Success(Response.new(response)) : Failure(response)
     end
 
     def headers
       {
-        "Content-Type" => "application/vnd.api+json",
-        "User-Agent" => "Datacite Ruby client version #{Datacite::VERSION}"
+        'Content-Type' => 'application/vnd.api+json',
+        'User-Agent' => "Datacite Ruby client version #{Datacite::VERSION}"
       }
     end
 

@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 RSpec.describe Datacite::Client do
-  subject(:client) { described_class.new(username: "foo", password: "bar") }
+  subject(:client) { described_class.new(username: 'foo', password: 'bar') }
 
-  describe "#register_doi" do
-    subject(:generate) { client.register_doi(prefix: "10.5438", suffix: "doc-1") }
+  describe '#register_doi' do
+    subject(:generate) { client.register_doi(prefix: '10.5438', suffix: 'doc-1') }
 
-    context "when the response is successful" do
+    context 'when the response is successful' do
       before do
-        stub_request(:post, "https://api.test.datacite.org/dois")
+        stub_request(:post, 'https://api.test.datacite.org/dois')
           .with(
-            body: "{\"data\":{\"type\":\"dois\",\"attributes\":{\"doi\":\"10.5438/doc-1\"}}}",
+            body: '{"data":{"type":"dois","attributes":{"doi":"10.5438/doc-1"}}}',
             headers: {
-              "Authorization" => "Basic Zm9vOmJhcg==",
-              "Content-Type" => "application/vnd.api+json"
+              'Authorization' => 'Basic Zm9vOmJhcg==',
+              'Content-Type' => 'application/vnd.api+json'
             }
           )
-          .to_return(status: 200, body: response, headers: { "Content-Type" => "application/json" })
+          .to_return(status: 200, body: response, headers: { 'Content-Type' => 'application/json' })
       end
 
       let(:response) do
@@ -112,23 +112,23 @@ RSpec.describe Datacite::Client do
         JSON
       end
 
-      it "can register a DOI" do
+      it 'can register a DOI' do
         expect(generate).to be_success
-        expect(generate.value!.doi).to eq "10.5438/doc-1"
+        expect(generate.value!.doi).to eq '10.5438/doc-1'
       end
     end
 
-    context "when the response is unsuccessful" do
+    context 'when the response is unsuccessful' do
       before do
-        stub_request(:post, "https://api.test.datacite.org/dois")
+        stub_request(:post, 'https://api.test.datacite.org/dois')
           .with(
-            body: "{\"data\":{\"type\":\"dois\",\"attributes\":{\"doi\":\"10.5438/doc-1\"}}}",
+            body: '{"data":{"type":"dois","attributes":{"doi":"10.5438/doc-1"}}}',
             headers: {
-              "Authorization" => "Basic Zm9vOmJhcg==",
-              "Content-Type" => "application/vnd.api+json"
+              'Authorization' => 'Basic Zm9vOmJhcg==',
+              'Content-Type' => 'application/vnd.api+json'
             }
           )
-          .to_return(status: 404, body: response, headers: { "Content-Type" => "application/json" })
+          .to_return(status: 404, body: response, headers: { 'Content-Type' => 'application/json' })
       end
 
       let(:response) do
@@ -137,29 +137,29 @@ RSpec.describe Datacite::Client do
         JSON
       end
 
-      it "returns a failure" do
+      it 'returns a failure' do
         expect(generate).to be_failure
         expect(generate.failure.body).to eq(
-          "errors" => [{ "status" => "404", "title" => "The resource you are looking for doesn't exist." }]
+          'errors' => [{ 'status' => '404', 'title' => "The resource you are looking for doesn't exist." }]
         )
       end
     end
   end
 
-  describe "#autogenerate_doi" do
-    subject(:generate) { client.autogenerate_doi(prefix: "10.5438") }
+  describe '#autogenerate_doi' do
+    subject(:generate) { client.autogenerate_doi(prefix: '10.5438') }
 
-    context "when the response is successful" do
+    context 'when the response is successful' do
       before do
-        stub_request(:post, "https://api.test.datacite.org/dois")
+        stub_request(:post, 'https://api.test.datacite.org/dois')
           .with(
-            body: "{\"data\":{\"type\":\"dois\",\"attributes\":{\"prefix\":\"10.5438\"}}}",
+            body: '{"data":{"type":"dois","attributes":{"prefix":"10.5438"}}}',
             headers: {
-              "Authorization" => "Basic Zm9vOmJhcg==",
-              "Content-Type" => "application/vnd.api+json"
+              'Authorization' => 'Basic Zm9vOmJhcg==',
+              'Content-Type' => 'application/vnd.api+json'
             }
           )
-          .to_return(status: 200, body: response, headers: { "Content-Type" => "application/json" })
+          .to_return(status: 200, body: response, headers: { 'Content-Type' => 'application/json' })
       end
 
       let(:response) do
@@ -255,23 +255,23 @@ RSpec.describe Datacite::Client do
         JSON
       end
 
-      it "can mint a random DOI" do
+      it 'can mint a random DOI' do
         expect(generate).to be_success
-        expect(generate.value!.doi).to eq "10.5438/0012"
+        expect(generate.value!.doi).to eq '10.5438/0012'
       end
     end
 
-    context "when the response is unsuccessful" do
+    context 'when the response is unsuccessful' do
       before do
-        stub_request(:post, "https://api.test.datacite.org/dois")
+        stub_request(:post, 'https://api.test.datacite.org/dois')
           .with(
-            body: "{\"data\":{\"type\":\"dois\",\"attributes\":{\"prefix\":\"10.5438\"}}}",
+            body: '{"data":{"type":"dois","attributes":{"prefix":"10.5438"}}}',
             headers: {
-              "Authorization" => "Basic Zm9vOmJhcg==",
-              "Content-Type" => "application/vnd.api+json"
+              'Authorization' => 'Basic Zm9vOmJhcg==',
+              'Content-Type' => 'application/vnd.api+json'
             }
           )
-          .to_return(status: 404, body: response, headers: { "Content-Type" => "application/json" })
+          .to_return(status: 404, body: response, headers: { 'Content-Type' => 'application/json' })
       end
 
       let(:response) do
@@ -280,28 +280,28 @@ RSpec.describe Datacite::Client do
         JSON
       end
 
-      it "returns a failure" do
+      it 'returns a failure' do
         expect(generate).to be_failure
         expect(generate.failure.body).to eq(
-          "errors" => [{ "status" => "404", "title" => "The resource you are looking for doesn't exist." }]
+          'errors' => [{ 'status' => '404', 'title' => "The resource you are looking for doesn't exist." }]
         )
       end
     end
   end
 
-  describe "#update" do
-    subject(:generate) { client.update(id: "10.5438/bc123df4567", attributes: attributes) }
+  describe '#update' do
+    subject(:generate) { client.update(id: '10.5438/bc123df4567', attributes: attributes) }
 
     let(:attributes) do
       {
-        "event" => "publish",
-        "url" => "https://purl.stanford.edu/st435qh3132",
-        "relatedIdentifiers" => [
+        'event' => 'publish',
+        'url' => 'https://purl.stanford.edu/st435qh3132',
+        'relatedIdentifiers' => [
           {
-            "relatedIdentifier" => "https://doi.org/10.xxxx/xxxxx",
-            "relatedIdentifierType" => "DOI",
-            "relationType" => "References",
-            "resourceTypeGeneral" => "Dataset"
+            'relatedIdentifier' => 'https://doi.org/10.xxxx/xxxxx',
+            'relatedIdentifierType' => 'DOI',
+            'relationType' => 'References',
+            'resourceTypeGeneral' => 'Dataset'
           }
         ]
       }
@@ -313,18 +313,18 @@ RSpec.describe Datacite::Client do
     end
 
     before do
-      stub_request(:put, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
+      stub_request(:put, 'https://api.test.datacite.org/dois/10.5438/bc123df4567')
         .with(
           body: request_body.chomp,
           headers: {
-            "Authorization" => "Basic Zm9vOmJhcg==",
-            "Content-Type" => "application/vnd.api+json"
+            'Authorization' => 'Basic Zm9vOmJhcg==',
+            'Content-Type' => 'application/vnd.api+json'
           }
         )
-        .to_return(status: status, body: response, headers: { "Content-Type" => "application/json" })
+        .to_return(status: status, body: response, headers: { 'Content-Type' => 'application/json' })
     end
 
-    context "when the response is successful" do
+    context 'when the response is successful' do
       let(:status) { 200 }
 
       let(:response) do
@@ -420,13 +420,13 @@ RSpec.describe Datacite::Client do
         JSON
       end
 
-      it "can update the DOI" do
+      it 'can update the DOI' do
         expect(generate).to be_success
-        expect(generate.value!.doi).to eq "10.5438/0012"
+        expect(generate.value!.doi).to eq '10.5438/0012'
       end
     end
 
-    context "when the response is unsuccessful" do
+    context 'when the response is unsuccessful' do
       let(:status) { 404 }
 
       let(:response) do
@@ -435,56 +435,56 @@ RSpec.describe Datacite::Client do
         JSON
       end
 
-      it "returns a failure" do
+      it 'returns a failure' do
         expect(generate).to be_failure
         expect(generate.failure.body).to eq(
-          "errors" => [{ "status" => "404", "title" => "The resource you are looking for doesn't exist." }]
+          'errors' => [{ 'status' => '404', 'title' => "The resource you are looking for doesn't exist." }]
         )
       end
     end
   end
 
-  describe "#exists?" do
-    subject(:result) { client.exists?(id: "10.5438/bc123df4567") }
+  describe '#exists?' do
+    subject(:result) { client.exists?(id: '10.5438/bc123df4567') }
 
     before do
-      stub_request(:head, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
+      stub_request(:head, 'https://api.test.datacite.org/dois/10.5438/bc123df4567')
         .with(headers: {
-                "Authorization" => "Basic Zm9vOmJhcg=="
+                'Authorization' => 'Basic Zm9vOmJhcg=='
               })
         .to_return(status: status)
     end
 
     let(:status) { 200 }
 
-    context "when the DOI exists" do
-      it "returns true" do
+    context 'when the DOI exists' do
+      it 'returns true' do
         expect(result.value!).to be true
       end
     end
 
-    context "when the DOI does not exists" do
+    context 'when the DOI does not exists' do
       let(:status) { 404 }
 
-      it "returns false" do
+      it 'returns false' do
         expect(result.value!).to be false
       end
     end
 
-    context "when the request is unsuccessful" do
+    context 'when the request is unsuccessful' do
       let(:status) { 500 }
 
-      it "returns a failure" do
+      it 'returns a failure' do
         expect(result).to be_failure
       end
     end
 
-    context "when no username or password provided" do
+    context 'when no username or password provided' do
       subject(:client) { described_class.new }
 
       before do
-        stub_request(:head, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
-          .to_return(status: status).with { |request| request.headers["Authorization"].nil? }
+        stub_request(:head, 'https://api.test.datacite.org/dois/10.5438/bc123df4567')
+          .to_return(status: status).with { |request| request.headers['Authorization'].nil? }
       end
 
       it 'does not include the "Authorization" header' do
@@ -493,46 +493,46 @@ RSpec.describe Datacite::Client do
     end
   end
 
-  describe "#metadata" do
-    subject(:result) { client.metadata(id: "10.5438/bc123df4567") }
+  describe '#metadata' do
+    subject(:result) { client.metadata(id: '10.5438/bc123df4567') }
 
     before do
-      stub_request(:get, "https://api.test.datacite.org/dois/10.5438/bc123df4567")
+      stub_request(:get, 'https://api.test.datacite.org/dois/10.5438/bc123df4567')
         .with(headers: {
-                "Authorization" => "Basic Zm9vOmJhcg=="
+                'Authorization' => 'Basic Zm9vOmJhcg=='
               })
-        .to_return(status: status, body: metadata.to_json, headers: { "Content-Type" => "application/json" })
+        .to_return(status: status, body: metadata.to_json, headers: { 'Content-Type' => 'application/json' })
     end
 
     let(:metadata) do
       {
-        "data" => {
-          "id" => "10.5438/bc123df4567",
-          "type" => "dois"
+        'data' => {
+          'id' => '10.5438/bc123df4567',
+          'type' => 'dois'
         }
       }
     end
 
     let(:status) { 200 }
 
-    context "when the DOI exists" do
-      it "returns metadata" do
+    context 'when the DOI exists' do
+      it 'returns metadata' do
         expect(result.value!).to eq metadata
       end
     end
 
-    context "when the DOI does not exists" do
+    context 'when the DOI does not exists' do
       let(:status) { 404 }
 
-      it "returns failure" do
+      it 'returns failure' do
         expect(result).to be_failure
       end
     end
 
-    context "when the request is unsuccessful" do
+    context 'when the request is unsuccessful' do
       let(:status) { 500 }
 
-      it "returns a failure" do
+      it 'returns a failure' do
         expect(result).to be_failure
       end
     end
