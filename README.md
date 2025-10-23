@@ -97,6 +97,24 @@ result.either(
 )
 ```
 
+## Working with Cocina
+
+### Validating
+
+This gem provides a method for translating a Cocina::Models::DRO object to a DataCite request based on the [DataCite API](https://datacite-metadata-schema.readthedocs.io/en/4.6/introduction/) (as of 10/23/2025 ).
+
+```
+attributes = Datacite::Mapping::FromCocina::Request.build(cocina_object: cocina_object)
+```
+
+The request can be validated to ensure, before sending it to datacite following the above client description:
+
+```
+Datacite::Validators::RequestValidator(attributes)
+```
+
+Note: A Datacite request payload can be validated without first translating from Cocina if you build the request manually or use your own metadata mapping library.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

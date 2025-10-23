@@ -3,9 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe Datacite::Validators::RequestValidator do
-  let(:validate) { described_class.validate(clazz, props) }
+  let(:validate) { described_class.validate(props) }
   let(:props) { Datacite::Mapping::FromCocina::Request.build(cocina_object:) }
-  let(:clazz) { Cocina::Models::DRO }
 
   context 'with a fully described object' do
     let(:cocina_object) do
@@ -233,6 +232,39 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                       {
                                         type: 'citation status',
                                         value: 'false'
+                                      }
+                                    ]
+                                  }
+                                ],
+                                event: [
+                                  {
+                                    type: 'deposit',
+                                    date: [
+                                      value: '2022-01-01',
+                                      type: 'publication',
+                                      encoding: {
+                                        code: 'w3cdtf'
+                                      }
+                                    ],
+                                    contributor: [
+                                      {
+                                        name: [
+                                          {
+                                            value: 'Stanford Digital Repository'
+                                          }
+                                        ],
+                                        role: [
+                                          {
+                                            value: 'publisher',
+                                            code: 'pbl',
+                                            uri: 'http://id.loc.gov/vocabulary/relators/pbl',
+                                            source: {
+                                              code: 'marcrelator',
+                                              uri: 'http://id.loc.gov/vocabulary/relators/'
+                                            }
+                                          }
+                                        ],
+                                        type: 'organization'
                                       }
                                     ]
                                   }

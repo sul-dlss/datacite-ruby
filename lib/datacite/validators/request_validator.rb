@@ -4,11 +4,8 @@ module Datacite
   module Validators
     # Perform validation against openapi definition for the DataCite API
     class RequestValidator
-      def self.validate(clazz, attributes)
-        return unless clazz.name
-
-        method_name = clazz.name.split('::').last
-        request_operation = root.request_operation(:post, "/validate/#{method_name}")
+      def self.validate(attributes)
+        request_operation = root.request_operation(:post, '/validate/Request')
 
         # JSON.parse forces serialization of objects like DateTime.
         json_attributes = JSON.parse(attributes.to_json)

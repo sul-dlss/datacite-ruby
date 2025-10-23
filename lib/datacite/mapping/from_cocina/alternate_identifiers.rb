@@ -3,7 +3,7 @@
 module Datacite
   module Mapping
     module FromCocina
-      # Maps alternative identifiers from from cocina description to DataCite JSON
+      # Maps alternative identifiers from cocina description to DataCite JSON
       class AlternateIdentifiers
         # @param [Cocina::Models::Description] description
         def self.build(...)

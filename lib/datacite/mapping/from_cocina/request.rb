@@ -33,7 +33,7 @@ module Datacite
             publisher: { name: 'Stanford Digital Repository' }, # per DataCite schema
             publicationYear: publication_year,
             subjects: Subject.build(description:),
-            dates: [],
+            dates: Date.build(cocina_object:),
             language: 'en',
             types: Types.build(description:),
             alternateIdentifiers: AlternateIdentifiers.build(description:),
@@ -41,11 +41,6 @@ module Datacite
             rightsList: RightsList.build(access:),
             descriptions: Descriptions.build(description:),
             relatedItems: related_items
-            # Not implemented
-            # attributes[:sizes] = Sizes.build(cocina_object: cocina_object)
-            # attributes[:formats] = Formats.build(cocina_object: cocina_object)
-            # attributes[:version] = identification.version if identification.version
-            # attributes[:geoLocations] = GeoLocations.build(cocina_object: cocina_object)
           }.merge(ContributorAttributes.build(description:)).compact
         end
 
