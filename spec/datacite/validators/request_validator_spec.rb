@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Datacite::Validators::RequestValidator do
   let(:validate) { described_class.validate(clazz, props) }
-  let(:props) { Datacite::Mapping::Request.build(cocina_object:) }
+  let(:props) { Datacite::Mapping::FromCocina::Request.build(cocina_object:) }
   let(:clazz) { Cocina::Models::DRO }
 
   context 'with a fully described object' do
@@ -268,18 +268,7 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                       value: 'DataCite resource types'
                                     }
                                   },
-                                  {
-                                    type: 'resource type',
-                                    source: {
-                                      value: 'Stanford self-deposit resource types'
-                                    },
-                                    structuredValue: [
-                                      {
-                                        value: 'dataset metadata',
-                                        type: 'subtype'
-                                      }
-                                    ]
-                                  }
+                                  self_deposit_type
                                 ],
                                 identifier: [
                                   {
@@ -371,6 +360,7 @@ RSpec.describe Datacite::Validators::RequestValidator do
     let(:apo_druid) { 'druid:pp000pp0000' }
     let(:url) { nil }
     let(:access) { { license: 'https://creativecommons.org/publicdomain/mark/1.0/' } }
+    let(:self_deposit_type) { {} }
     let(:dro_subject) do
       [
         {
@@ -384,7 +374,6 @@ RSpec.describe Datacite::Validators::RequestValidator do
         }
       ]
     end
-    let(:props) { Datacite::Mapping::Request.build(cocina_object:) }
 
     let(:clazz) { Cocina::Models::DRO }
 
@@ -409,6 +398,48 @@ RSpec.describe Datacite::Validators::RequestValidator do
             type: 'topic'
           }
         ]
+      end
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'with a self deposit form type' do
+      let(:self_deposit_type) do
+        {
+          type: 'resource type',
+          source: {
+            value: 'Stanford self-deposit resource types'
+          },
+          structuredValue: [
+            {
+              value: 'extra dataset metadata',
+              type: 'type'
+            }
+          ]
+        }
+      end
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'with a self deposit form subtype' do
+      let(:self_deposit_type) do
+        {
+          type: 'resource type',
+          source: {
+            value: 'Stanford self-deposit resource types'
+          },
+          structuredValue: [
+            {
+              value: 'subset dataset metadata',
+              type: 'subtype'
+            }
+          ]
+        }
       end
 
       it 'does not raise' do
