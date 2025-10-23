@@ -4,6 +4,8 @@ require 'spec_helper'
 
 RSpec.describe Datacite::Validators::RequestValidator do
   let(:validate) { described_class.validate(clazz, props) }
+  let(:props) { Datacite::Mapping::Request.build(cocina_object:) }
+  let(:clazz) { Cocina::Models::DRO }
 
   context 'with a fully described object' do
     let(:cocina_object) do
@@ -23,15 +25,15 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                     status: 'primary',
                                     role: [
                                       {
-                                        value: 'Funder',
+                                        value: 'Publisher',
                                         source: {
                                           value: 'H2 contributor role terms'
                                         }
                                       },
                                       {
-                                        value: 'funder',
-                                        code: 'fnd',
-                                        uri: 'http://id.loc.gov/vocabulary/relators/fnd',
+                                        value: 'publisher',
+                                        code: 'pbl',
+                                        uri: 'http://id.loc.gov/vocabulary/relators/pbl',
                                         source: {
                                           code: 'marcrelator',
                                           uri: 'http://id.loc.gov/vocabulary/relators/'
@@ -103,14 +105,52 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                   {
                                     name: [
                                       {
+                                        value: 'Justin Stanford'
+                                      }
+                                    ],
+                                    type: 'person',
+                                    role: [
+                                      {
+                                        value: 'degree committee member'
+                                      },
+                                      {
+                                        value: 'thesis advisor',
+                                        code: 'ths',
+                                        uri: 'http://id.loc.gov/vocabulary/relators/ths',
+                                        source: {
+                                          code: 'marcrelator',
+                                          uri: 'http://id.loc.gov/vocabulary/relators/'
+                                        }
+                                      }
+                                    ],
+                                    affiliation: [
+                                      {
+                                        value: 'Stanford University',
+                                        identifier: [
+                                          {
+                                            uri: 'https://ror.org/00f54p054',
+                                            type: 'ROR',
+                                            source: {
+                                              code: 'ror'
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    note: [
+                                      {
+                                        type: 'citation status',
+                                        value: 'false'
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    name: [
+                                      {
                                         structuredValue: [
                                           {
-                                            value: 'John',
-                                            type: 'forename'
-                                          },
-                                          {
-                                            value: 'Stanford',
-                                            type: 'surname'
+                                            value: 'John Stanford',
+                                            type: 'name'
                                           }
                                         ]
                                       }
@@ -118,15 +158,15 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                     type: 'person',
                                     role: [
                                       {
-                                        value: 'Author',
+                                        value: 'Editor',
                                         source: {
                                           value: 'H2 contributor role terms'
                                         }
                                       },
                                       {
-                                        value: 'author',
-                                        code: 'aut',
-                                        uri: 'http://id.loc.gov/vocabulary/relators/aut',
+                                        value: 'editor',
+                                        code: 'edt',
+                                        uri: 'http://id.loc.gov/vocabulary/relators/edt',
                                         source: {
                                           code: 'marcrelator',
                                           uri: 'http://id.loc.gov/vocabulary/relators/'
@@ -227,6 +267,18 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                     source: {
                                       value: 'DataCite resource types'
                                     }
+                                  },
+                                  {
+                                    type: 'resource type',
+                                    source: {
+                                      value: 'Stanford self-deposit resource types'
+                                    },
+                                    structuredValue: [
+                                      {
+                                        value: 'dataset metadata',
+                                        type: 'subtype'
+                                      }
+                                    ]
                                   }
                                 ],
                                 identifier: [
@@ -243,6 +295,20 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                 ],
                                 purl: purl,
                                 relatedResource: [
+                                  {
+                                    title: [{
+                                      value: 'A random related work title'
+                                    }]
+                                  },
+                                  {
+                                    access: {
+                                      url: [
+                                        {
+                                          value: 'https://doi.org/10.1234/example.doi'
+                                        }
+                                      ]
+                                    }
+                                  },
                                   {
                                     note: [
                                       {
@@ -262,28 +328,36 @@ RSpec.describe Datacite::Validators::RequestValidator do
                                       }
                                     ]
                                   },
+                                  {
+                                    type: 'referenced by',
+                                    dataCiteRelationType: 'IsReferencedBy',
+                                    identifier: [
+                                      {
+                                        type: 'arxiv',
+                                        uri: 'https://arxiv.org/10.1234'
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    type: 'referenced by',
+                                    dataCiteRelationType: 'IsReferencedBy',
+                                    identifier: [
+                                      {
+                                        type: 'pmid',
+                                        uri: 'https://pmid.org/10.1234'
+                                      }
+                                    ]
+                                  },
                                   {} # Blank will be removed.
                                 ],
-                                subject: [
-                                  {
-                                    value: 'Marine biology',
-                                    type: 'topic',
-                                    uri: 'http://id.worldcat.org/fast/1009447',
-                                    source: {
-                                      code: 'fast',
-                                      uri: 'http://id.worldcat.org/fast/'
-                                    }
-                                  }
-                                ],
+                                subject: dro_subject,
                                 title: [{ value: title }]
                               },
                               identification: {
                                 sourceId: 'sul:8.559351',
                                 doi: doi
                               },
-                              access: {
-                                license: 'https://creativecommons.org/publicdomain/mark/1.0/'
-                              },
+                              access:,
                               administrative: {
                                 hasAdminPolicy: apo_druid
                               },
@@ -296,12 +370,61 @@ RSpec.describe Datacite::Validators::RequestValidator do
     let(:title) { 'title' }
     let(:apo_druid) { 'druid:pp000pp0000' }
     let(:url) { nil }
+    let(:access) { { license: 'https://creativecommons.org/publicdomain/mark/1.0/' } }
+    let(:dro_subject) do
+      [
+        {
+          value: 'Marine biology',
+          type: 'topic',
+          uri: 'http://id.worldcat.org/fast/1009447',
+          source: {
+            code: 'fast',
+            uri: 'http://id.worldcat.org/fast/'
+          }
+        }
+      ]
+    end
     let(:props) { Datacite::Mapping::Request.build(cocina_object:) }
 
     let(:clazz) { Cocina::Models::DRO }
 
     it 'does not raise' do
       expect { validate }.not_to raise_error
+    end
+
+    context 'when an embargoed item' do
+      let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2026-10-23T07:00:00Z', view: 'world') }
+      let(:access) { { embargo: } }
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+
+    context 'when subject is not a fast subject' do
+      let(:dro_subject) do
+        [
+          {
+            value: 'Marine biology',
+            type: 'topic'
+          }
+        ]
+      end
+
+      it 'does not raise' do
+        expect { validate }.not_to raise_error
+      end
+    end
+  end
+
+  context 'with a minimal object' do
+    let(:cocina_object) { build(:dro) }
+
+    it 'raises a validation error' do
+      expect do
+        validate
+      end.to raise_error(Datacite::ValidationError)
+        .with_message('#/components/schemas/Identifier/properties/identifier does not allow null values')
     end
   end
 end
