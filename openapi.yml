@@ -7,7 +7,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 paths:
-  /validate/DRO:
+  /validate/Request:
     post:
       summary: Validate a DataCite Request for a DRO
       requestBody:

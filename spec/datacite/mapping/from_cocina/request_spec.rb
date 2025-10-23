@@ -193,6 +193,39 @@ RSpec.describe Datacite::Mapping::FromCocina::Request do
                                   ]
                                 }
                               ],
+                              event: [
+                                {
+                                  type: 'deposit',
+                                  date: [
+                                    value: '2022-01-01',
+                                    type: 'deposit',
+                                    encoding: {
+                                      code: 'w3cdtf'
+                                    }
+                                  ],
+                                  contributor: [
+                                    {
+                                      name: [
+                                        {
+                                          value: 'Stanford Digital Repository'
+                                        }
+                                      ],
+                                      role: [
+                                        {
+                                          value: 'publisher',
+                                          code: 'pbl',
+                                          uri: 'http://id.loc.gov/vocabulary/relators/pbl',
+                                          source: {
+                                            code: 'marcrelator',
+                                            uri: 'http://id.loc.gov/vocabulary/relators/'
+                                          }
+                                        }
+                                      ],
+                                      type: 'organization'
+                                    }
+                                  ]
+                                }
+                              ],
                               form: [
                                 {
                                   value: 'Dataset',
@@ -278,6 +311,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Request do
                               doi: doi
                             },
                             access: {
+                              embargo:,
                               license: 'https://creativecommons.org/publicdomain/mark/1.0/'
                             },
                             administrative: {
@@ -292,6 +326,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Request do
   let(:title) { 'title' }
   let(:apo_druid) { 'druid:pp000pp0000' }
   let(:url) { nil }
+  let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2026-10-23T07:00:00Z', view: 'world') }
 
   it 'populates the attributes hash correctly' do # rubocop:disable RSpec/ExampleLength
     expect(request).to eq(
@@ -312,7 +347,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Request do
         publisher: {
           name: 'Stanford Digital Repository'
         },
-        publicationYear: '2025',
+        publicationYear: '2026',
         subjects: [
           {
             subject: 'Marine biology',
@@ -321,7 +356,16 @@ RSpec.describe Datacite::Mapping::FromCocina::Request do
             schemeUri: 'http://id.worldcat.org/fast/'
           }
         ],
-        dates: [],
+        dates: [
+          {
+            date: '2022-01-01',
+            dateType: 'Submitted'
+          },
+          {
+            date: '2026-10-23T07:00:00+00:00',
+            dateType: 'Available'
+          }
+        ],
         language: 'en',
         types: {
           resourceTypeGeneral: 'Dataset',
