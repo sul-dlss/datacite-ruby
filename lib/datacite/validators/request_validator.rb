@@ -2,7 +2,7 @@
 
 module Datacite
   module Validators
-    # Perform validation against openapi
+    # Perform validation against openapi definition for the DataCite API
     class RequestValidator
       def self.validate(clazz, attributes)
         return unless clazz.name
