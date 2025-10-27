@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Datacite::Mapping::FromCocina::Request do
+RSpec.describe Datacite::Mapping::FromCocina::Attributes do
   let(:request) { described_class.build(cocina_object:) }
   let(:cocina_object) do
     Cocina::Models::DRO.new(externalIdentifier: druid,

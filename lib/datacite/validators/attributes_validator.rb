@@ -6,7 +6,7 @@ require 'pathname'
 module Datacite
   module Validators
     # Perform validation against openapi definition for the DataCite API
-    class RequestValidator
+    class AttributesValidator
       def self.validate(attributes)
         json_attributes = JSON.parse(attributes.to_json)
         schemer = JSONSchemer.schema(json_schema_path)
@@ -17,7 +17,7 @@ module Datacite
       end
 
       def self.json_schema_path
-        Pathname.new(File.expand_path('../../../datacite-v4.5.json', __dir__))
+        Pathname.new(File.expand_path('../../../datacite-v4.6.json', __dir__))
       end
       private_class_method :json_schema_path
     end

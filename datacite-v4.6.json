@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "id": "datacite-v4.5.json",
-    "title": "DataCite v4.5",
-    "description": "JSON representation of the DataCite v4.5 schema.",
+    "id": "datacite-v4.6.json",
+    "title": "DataCite v4.6",
+    "description": "JSON representation of the DataCite v4.6 schema.",
     "additionalProperties": false,
     "definitions": {
         "nameType": {
@@ -337,15 +337,6 @@
             },
             "uniqueItems": true
         },
-        "types": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "resourceType": {"type": "string"},
-                "resourceTypeGeneral": {"$ref": "#/definitions/resourceTypeGeneral"}
-            },
-            "required": ["resourceTypeGeneral"]
-        },
         "creators": {
             "type": "array",
             "items": {
@@ -426,6 +417,15 @@
             "type": "string",
             "$comment": "Primary language of the resource. Allowed values are taken from  IETF BCP 47, ISO 639-1 language codes."
         },
+        "types": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "resourceType": {"type": "string"},
+                "resourceTypeGeneral": {"$ref": "#/definitions/resourceTypeGeneral"}
+            },
+            "required": ["resourceTypeGeneral"]
+        },
         "alternateIdentifiers": {
             "type": "array",
             "items": {
@@ -453,80 +453,6 @@
                 "if": {"$ref": "#/definitions/relatedObjectIf"},
                 "else": {"$ref": "#/definitions/relatedObjectElse"}
             }
-        },
-        "relatedItems": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "allOf": [{ "$ref": "#/definitions/relatedObject"}],
-                "unevaluatedProperties": false,
-                "properties": {
-                    "relatedItemIdentifier": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "properties": {
-                          "relatedItemIdentifier": {"type": "string"},
-                          "relatedItemIdentifierType": {"$ref": "#/definitions/relatedIdentifierType"}
-                        },
-                        "required": ["relatedItemIdentifier", "relatedItemIdentifierType"]
-                    },
-                    "relatedItemType": {"$ref": "#/definitions/resourceTypeGeneral"},
-                    "creators": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "unevaluatedProperties": false,
-                            "allOf": [{ "$ref": "#/definitions/creator" }],
-                            "required": ["name"]
-                        }
-                    },
-                    "contributors": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "unevaluatedProperties": false,
-                            "allOf": [{ "$ref": "#/definitions/contributor" }],
-                            "required": ["contributorType", "name"]
-                        }
-                    },
-                    "titles": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "properties": {
-                                "title": {"type": "string"},
-                                "titleType": {"$ref": "#/definitions/titleType"},
-                                "lang": {"type": "string"}
-                            },
-                            "required": ["title"]
-                        },
-                        "minItems": 1,
-                        "uniqueItems": true
-                    },
-                    "publicationYear": {"$ref": "#/definitions/publicationYear"},
-                    "volume": {"type": "string"},
-                    "issue": {"type": "string"},
-                    "firstPage": {"type": "string"},
-                    "lastPage": {"type": "string"},
-                    "edition": {"type": "string"},
-                    "publisher": {"type": "string"},
-                    "number": {"type":"string"},
-                    "numberType": {
-                        "type": "string",
-                        "enum": [
-                            "Article",
-                            "Chapter",
-                            "Report",
-                            "Other"
-                        ]
-                    }
-                },
-                "required": ["titles", "relatedItemType", "relationType"],
-                "if": {"$ref": "#/definitions/relatedObjectIf"},
-                "else": {"$ref": "#/definitions/relatedObjectElse"}
-            },
-            "uniqueItems": true
         },
         "sizes": {
             "type": "array",
@@ -626,20 +552,87 @@
             },
             "uniqueItems": true
         },
+        "relatedItems": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "allOf": [{ "$ref": "#/definitions/relatedObject"}],
+                "unevaluatedProperties": false,
+                "properties": {
+                    "relatedItemIdentifier": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "relatedItemIdentifier": {"type": "string"},
+                          "relatedItemIdentifierType": {"$ref": "#/definitions/relatedIdentifierType"}
+                        },
+                        "required": ["relatedItemIdentifier", "relatedItemIdentifierType"]
+                    },
+                    "relatedItemType": {"$ref": "#/definitions/resourceTypeGeneral"},
+                    "creators": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "unevaluatedProperties": false,
+                            "allOf": [{ "$ref": "#/definitions/creator" }],
+                            "required": ["name"]
+                        }
+                    },
+                    "contributors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "unevaluatedProperties": false,
+                            "allOf": [{ "$ref": "#/definitions/contributor" }],
+                            "required": ["contributorType", "name"]
+                        }
+                    },
+                    "titles": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "title": {"type": "string"},
+                                "titleType": {"$ref": "#/definitions/titleType"},
+                                "lang": {"type": "string"}
+                            },
+                            "required": ["title"]
+                        },
+                        "minItems": 1,
+                        "uniqueItems": true
+                    },
+                    "publicationYear": {"$ref": "#/definitions/publicationYear"},
+                    "volume": {"type": "string"},
+                    "issue": {"type": "string"},
+                    "firstPage": {"type": "string"},
+                    "lastPage": {"type": "string"},
+                    "edition": {"type": "string"},
+                    "publisher": {"type": "string"},
+                    "number": {"type":"string"},
+                    "numberType": {
+                        "type": "string",
+                        "enum": [
+                            "Article",
+                            "Chapter",
+                            "Report",
+                            "Other"
+                        ]
+                    }
+                },
+                "required": ["titles", "relatedItemType", "relationType"],
+                "if": {"$ref": "#/definitions/relatedObjectIf"},
+                "else": {"$ref": "#/definitions/relatedObjectElse"}
+            },
+            "uniqueItems": true
+        },
         "schemaVersion": {
             "type": "string",
             "const": "http://datacite.org/schema/kernel-4"
-        },
-        "container": {
-            "type": "object",
-            "properties": {
-                "type": {"type": "string"},
-                "title": {"type": "string"},
-                "firstPage": {"type": "string"}
-            }
         }
     },
     "required": [
+        "identifiers",
         "creators",
         "titles",
         "publisher",

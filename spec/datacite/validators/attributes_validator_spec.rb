@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Datacite::Validators::RequestValidator do
+RSpec.describe Datacite::Validators::AttributesValidator do
   let(:validate) { described_class.validate(props) }
   let(:props) do
     {
@@ -266,7 +266,7 @@ RSpec.describe Datacite::Validators::RequestValidator do
       expect do
         validate
       end.to raise_error(Datacite::ValidationError)
-        .with_message('object at root is missing required properties: creators, ' \
+        .with_message('object at root is missing required properties: identifiers, creators, ' \
                       'titles, publisher, publicationYear, types')
     end
   end

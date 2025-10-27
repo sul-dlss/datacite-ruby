@@ -6,8 +6,8 @@ require 'cocina/models'
 module Datacite
   module Mapping
     module FromCocina
-      # Transform the Cocina::Models::DRO to a DataCite request payload
-      class Request
+      # Transform the Cocina::Models::DRO to a DataCite request attributes payload
+      class Attributes
         # @param [Cocina::Models::DRO] cocina_object
         def self.build(...)
           new(...).call
