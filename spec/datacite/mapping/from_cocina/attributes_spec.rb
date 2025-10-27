@@ -256,6 +256,18 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
                                   source: {
                                     value: 'DataCite resource types'
                                   }
+                                },
+                                {
+                                  type: 'resource type',
+                                  source: {
+                                    value: 'Stanford self-deposit resource types'
+                                  },
+                                  structuredValue: [
+                                    {
+                                      value: 'dataset metadata',
+                                      type: 'type'
+                                    }
+                                  ]
                                 }
                               ],
                               identifier: [
@@ -290,8 +302,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
                                       uri: 'https://doi.org/10.1234/example.doi'
                                     }
                                   ]
-                                },
-                                {} # Blank will be removed.
+                                }
                               ],
                               subject: [
                                 {
@@ -302,6 +313,10 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
                                     code: 'fast',
                                     uri: 'http://id.worldcat.org/fast/'
                                   }
+                                },
+                                {
+                                  value: 'Non Marine biology',
+                                  type: 'topic'
                                 }
                               ],
                               title: [{ value: title }]
@@ -310,10 +325,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
                               sourceId: 'sul:8.559351',
                               doi: doi
                             },
-                            access: {
-                              embargo:,
-                              license: 'https://creativecommons.org/publicdomain/mark/1.0/'
-                            },
+                            access:,
                             administrative: {
                               hasAdminPolicy: apo_druid
                             },
@@ -326,6 +338,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
   let(:title) { 'title' }
   let(:apo_druid) { 'druid:pp000pp0000' }
   let(:url) { nil }
+  let(:access) { { embargo:, license: 'https://creativecommons.org/publicdomain/mark/1.0/' } }
   let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2026-10-23T07:00:00Z', view: 'world') }
 
   it 'populates the attributes hash correctly' do # rubocop:disable RSpec/ExampleLength
@@ -354,6 +367,9 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
             subjectScheme: 'fast',
             valueUri: 'http://id.worldcat.org/fast/1009447',
             schemeUri: 'http://id.worldcat.org/fast/'
+          },
+          {
+            subject: 'Non Marine biology'
           }
         ],
         dates: [
@@ -369,7 +385,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
         language: 'en',
         types: {
           resourceTypeGeneral: 'Dataset',
-          resourceType: ''
+          resourceType: 'dataset metadata'
         },
         alternateIdentifiers: [
           {
@@ -468,5 +484,13 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
         ]
       }
     )
+  end
+
+  context 'when there is no emargo' do
+    let(:access) { { license: 'https://creativecommons.org/publicdomain/mark/1.0/' } }
+
+    it 'uses the current year for publicationYear' do
+      expect(request[:publicationYear]).to eq Time.now.year.to_s
+    end
   end
 end
