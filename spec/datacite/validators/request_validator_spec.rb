@@ -8,6 +8,7 @@ RSpec.describe Datacite::Validators::RequestValidator do
     {
       event: 'publish',
       url: 'https://purl.stanford.edu/bb666bb1234',
+      schemaVersion: 'http://datacite.org/schema/kernel-4',
       identifiers: [
         {
           identifier: '10.25740/bb666bb1234',
@@ -265,12 +266,12 @@ RSpec.describe Datacite::Validators::RequestValidator do
       expect do
         validate
       end.to raise_error(Datacite::ValidationError)
-        .with_message('#/components/schemas/Request missing required parameters: ' \
-                      'creators, identifiers, publicationYear, publisher, titles, types')
+        .with_message('object at root is missing required properties: creators, ' \
+                      'titles, publisher, publicationYear, types')
     end
   end
 
-  context 'when an invalid valud is provided' do
+  context 'when an invalid value is provided' do
     before do
       props[:unkownProperty] = 'this is not valid'
     end
@@ -279,7 +280,7 @@ RSpec.describe Datacite::Validators::RequestValidator do
       expect do
         validate
       end.to raise_error(Datacite::ValidationError)
-        .with_message('#/components/schemas/Request does not define properties: unkownProperty')
+        .with_message('object property at `/unkownProperty` is a disallowed additional property')
     end
   end
 end
