@@ -481,7 +481,8 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
           {
             funderName: 'National Institute of Health'
           }
-        ]
+        ],
+        schemaVersion: 'http://datacite.org/schema/kernel-4'
       }
     )
   end

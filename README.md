@@ -101,7 +101,7 @@ result.either(
 
 ### Validating
 
-This gem provides a method for translating a Cocina::Models::DRO object to a DataCite request based on the [DataCite API](https://datacite-metadata-schema.readthedocs.io/en/4.6/introduction/) (as of 10/23/2025 ).
+This gem provides a method for translating a Cocina::Models::DRO object to a DataCite request based on the [DataCite API](https://datacite-metadata-schema.readthedocs.io/en/4.6/introduction/) (as of 10/23/2025 ). This will raise ValidationErrors if the translated cocina does not validate. Thus you don't need to call the validator separately when mapping cocina.
 
 ```
 attributes = Datacite::Mapping::FromCocina::Request.build(cocina_object: cocina_object)

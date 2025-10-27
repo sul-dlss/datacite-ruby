@@ -25,7 +25,7 @@ module Datacite
         delegate :access, :description, :identification, to: :cocina_object
 
         def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-          {
+          attributes = {
             event: 'publish',
             url: description.purl,
             identifiers: Identifiers.build(identification:),
@@ -40,8 +40,11 @@ module Datacite
             relatedIdentifiers: related_identifiers,
             rightsList: RightsList.build(access:),
             descriptions: Descriptions.build(description:),
-            relatedItems: related_items
+            relatedItems: related_items,
+            schemaVersion: 'http://datacite.org/schema/kernel-4'
           }.merge(ContributorAttributes.build(description:)).compact
+
+          attributes if Datacite::Validators::AttributesValidator.validate(attributes)
         end
 
         private

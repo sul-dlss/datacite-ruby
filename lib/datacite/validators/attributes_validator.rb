@@ -16,6 +16,8 @@ module Datacite
         raise ValidationError, results.map { |result| result.fetch('error') }.join('\n')
       end
 
+      # This json_schema file borrowed from https://github.com/inveniosoftware/datacite/blob/master/datacite/schemas/datacite-v4.5.json
+      # with the addition of the `identifiers` block
       def self.json_schema_path
         Pathname.new(File.expand_path('../../../datacite-v4.6.json', __dir__))
       end
