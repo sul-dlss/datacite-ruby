@@ -13,8 +13,6 @@ SimpleCov.start do
 end
 
 require 'datacite'
-require 'cocina/models'
-require 'cocina/rspec'
 require 'webmock/rspec'
 require 'byebug'
 require 'base64'

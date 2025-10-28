@@ -8,6 +8,7 @@ gemspec
 # Specify development dependencies here
 gem 'base64'
 gem 'byebug'
+gem 'cocina-models' # only used in tests
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.0'
 gem 'rubocop', '~> 1.7'
