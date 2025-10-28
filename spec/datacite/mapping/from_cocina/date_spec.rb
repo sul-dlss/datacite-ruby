@@ -175,7 +175,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
             {
               view: 'world',
               download: 'world',
-              releaseDate: DateTime.parse('2022-01-01'),
+              releaseDate: '2022-01-01T00:00:00+00:00',
               useAndReproductionStatement: 'in public domain'
             }
         }
@@ -197,7 +197,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
       it 'includes correct Available date' do
         expect(dates).to include(
           {
-            date: '2022-01-01',
+            date: '2022-01-01T00:00:00+00:00',
             dateType: 'Available'
           }
         )
@@ -271,7 +271,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
             {
               view: 'world',
               download: 'world',
-              releaseDate: DateTime.parse('2022-01-01'),
+              releaseDate: '2022-01-01T00:00:00+00:00',
               useAndReproductionStatement: 'in public domain'
             }
         }
@@ -293,7 +293,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
       it 'includes correct Available date' do
         expect(dates).to include(
           {
-            date: '2022-01-01',
+            date: '2022-01-01T00:00:00+00:00',
             dateType: 'Available'
           }
         )
@@ -1056,7 +1056,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
             {
               view: 'world',
               download: 'world',
-              releaseDate: DateTime.parse('2023-01-01'),
+              releaseDate: '2023-01-01T00:00:00+00:00',
               useAndReproductionStatement: 'in public domain'
             }
         }
@@ -1078,7 +1078,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
       it 'includes correct Available date' do
         expect(dates).to include(
           {
-            date: '2023-01-01',
+            date: '2023-01-01T00:00:00+00:00',
             dateType: 'Available'
           }
         )

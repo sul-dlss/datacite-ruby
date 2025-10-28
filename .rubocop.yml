@@ -20,7 +20,7 @@ Layout/LineLength:
   Max: 120
 
 RSpec/ExampleLength:
-  Max: 7
+  Enabled: false
 
 Gemspec/DeprecatedAttributeAssignment: # new in 1.30
   Enabled: true

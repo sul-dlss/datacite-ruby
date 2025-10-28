@@ -88,7 +88,7 @@ module Datacite
 
           @available_date ||=
             {
-              date: cocina_dro_access&.embargo&.releaseDate,
+              date: cocina_dro_access&.embargo&.releaseDate.to_s,
               dateType: 'Available'
             }
         end

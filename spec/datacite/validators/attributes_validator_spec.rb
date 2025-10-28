@@ -52,7 +52,7 @@ RSpec.describe Datacite::Validators::AttributesValidator do
       expect { validate }.not_to raise_error
     end
 
-    context 'when contributors are prosent' do
+    context 'when contributors are present' do
       let(:contributors) do
         [
           {

@@ -9,6 +9,8 @@ module Datacite
       # Transform the Cocina::Models::DRO to a DataCite request attributes payload
       class Attributes
         # @param [Cocina::Models::DRO] cocina_object
+        # @return [Hash] Hash of DataCite attributes, conforming to the DataCite API Schema
+        # @raise [Datacite::ValidationError] if the attributes do no validate to the DataCite schema
         def self.build(...)
           new(...).call
         end

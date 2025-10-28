@@ -341,7 +341,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
   let(:access) { { embargo:, license: 'https://creativecommons.org/publicdomain/mark/1.0/' } }
   let(:embargo) { Cocina::Models::Embargo.new(releaseDate: '2026-10-23T07:00:00Z', view: 'world') }
 
-  it 'populates the attributes hash correctly' do # rubocop:disable RSpec/ExampleLength
+  it 'populates the attributes hash correctly' do
     expect(request).to eq(
       {
         event: 'publish',
