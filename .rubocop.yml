@@ -19,6 +19,9 @@ RSpec/MultipleMemoizedHelpers:
 Layout/LineLength:
   Max: 120
 
+RSpec/ExampleLength:
+  Enabled: false
+
 Gemspec/DeprecatedAttributeAssignment: # new in 1.30
   Enabled: true
 Gemspec/DevelopmentDependencies: # new in 1.44
