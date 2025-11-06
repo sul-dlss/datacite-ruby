@@ -31,7 +31,7 @@ GEM
     base64 (0.3.0)
     bigdecimal (3.3.1)
     byebug (12.0.0)
-    cocina-models (0.108.1)
+    cocina-models (0.108.2)
       activesupport
       deprecation
       dry-struct (~> 1.0)
@@ -194,7 +194,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    uri (1.1.0)
+    uri (1.1.1)
     webmock (3.26.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
