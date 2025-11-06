@@ -5,26 +5,39 @@ require 'pathname'
 
 module Datacite
   module Validators
-    # Perform validation against openapi definition for the DataCite API
+    # Validate a hash of attributes against the DataCite schema
     class AttributesValidator
       # @param [Hash] attributes for a DataCite API request
-      # @return [Boolean] true if valid
-      # @raise [Datacite::ValidationError] if the attributes do no validate to the DataCite schema
-      def self.validate(attributes)
-        schemer = JSONSchemer.schema(json_schema_path)
-        results = schemer.validate(attributes)
-        # results is an Enumerator, so checking 'none?' to determine if there were no errors
-        return true if results.none?
-
-        raise ValidationError, results.map { |result| result.fetch('error') }.join('\n')
+      def initialize(attributes:)
+        @attributes = attributes
       end
 
-      # This json_schema file borrowed from https://github.com/inveniosoftware/datacite/blob/master/datacite/schemas/datacite-v4.5.json
-      # with the addition of the `identifiers` block
-      def self.json_schema_path
+      # @return [Boolean] true if valid, false if not
+      def valid?
+        results.none? # If there are no results (an Enumerator), there were no errors, thus valid
+      end
+
+      def errors
+        results.map { |result| result.fetch('error') }
+      end
+
+      private
+
+      attr_reader :attributes
+
+      def results
+        @results ||= schema.validate(attributes)
+      end
+
+      def schema
+        @schema ||= JSONSchemer.schema(schema_path)
+      end
+
+      # This schema file was borrowed from https://github.com/inveniosoftware/datacite/blob/master/datacite/schemas/datacite-v4.5.json
+      # and adapted to add the `identifiers` block to comply with v4.6 of the schema.
+      def schema_path
         Pathname.new(File.expand_path('../schema/datacite-v4.6.json', __dir__))
       end
-      private_class_method :json_schema_path
     end
   end
 end

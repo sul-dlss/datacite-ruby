@@ -16,6 +16,7 @@ require 'datacite'
 require 'webmock/rspec'
 require 'byebug'
 require 'base64'
+require 'cocina/models'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
