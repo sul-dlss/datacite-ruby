@@ -101,19 +101,21 @@ result.either(
 
 ### Validating
 
-This gem provides a method for mapping a Cocina::Models::DRO object to a DataCite request based on the [DataCite API](https://datacite-metadata-schema.readthedocs.io/en/4.6/introduction/) (as of 10/23/2025 ). This will raise Datacite::ValidationErrors if the mapped cocina does not validate. Thus you don't need to call the validator separately when mapping cocina.
+This gem provides a method for mapping and validating a `Cocina::Models::DRO` object to a DataCite request based on the DataCite JSON Schema (v4.6), without sending any data to the DataCite API:
 
-```
-attributes = Datacite::Mapping::FromCocina::Attributes.build(cocina_object: cocina_object)
-```
-
-The request can be validated to ensure, before sending it to datacite following the above client description:
-
-```
-Datacite::Validators::AttributesValidator(attributes)
+```ruby
+cocina_object = Cocina::Models::DRO.new(...)
+validator = Datacite::Validators::CocinaValidator.new(cocina_object:)
+puts validator.errors.join(', ') unless validator.valid?
 ```
 
-Note: A Datacite request payload can be validated without first translating from Cocina if you build the request manually or use your own metadata mapping library.
+NOTE: A Datacite request payload can be validated without first translating from Cocina if you build the request manually or use your own metadata mapping library, e.g.:
+
+```ruby
+datacite_attributes = { ... }
+validator = Datacite::Validators::AttributesValidator.new(attributes: datacite_attributes)
+puts validator.errors.join(', ') unless validator.valid?
+```
 
 ## Development
 

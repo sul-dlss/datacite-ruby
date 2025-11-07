@@ -10,7 +10,6 @@ module Datacite
       class Attributes
         # @param [Cocina::Models::DRO] cocina_object
         # @return [Hash] Hash of DataCite attributes, conforming to the DataCite API Schema
-        # @raise [Datacite::ValidationError] if the attributes do no validate to the DataCite schema
         def self.build(...)
           new(...).call
         end
@@ -27,7 +26,7 @@ module Datacite
         delegate :access, :description, :identification, to: :cocina_object
 
         def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-          attributes = {
+          {
             event: 'publish',
             url: description.purl,
             identifiers: Identifiers.build(identification:),
@@ -45,8 +44,6 @@ module Datacite
             relatedItems: related_items,
             schemaVersion: 'http://datacite.org/schema/kernel-4'
           }.merge(ContributorAttributes.build(description:)).compact
-
-          attributes if Datacite::Validators::AttributesValidator.validate(attributes)
         end
 
         private

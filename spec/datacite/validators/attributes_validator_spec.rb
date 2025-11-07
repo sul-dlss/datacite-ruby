@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe Datacite::Validators::AttributesValidator do
-  let(:validate) { described_class.validate(props) }
-  let(:props) do
+  let(:validator) { described_class.new(attributes:) }
+  let(:attributes) do
     {
       event: 'publish',
       url: 'https://purl.stanford.edu/bb666bb1234',
@@ -48,8 +48,8 @@ RSpec.describe Datacite::Validators::AttributesValidator do
   end
 
   context 'with the minimal required request payload' do
-    it 'does not raise' do
-      expect { validate }.not_to raise_error
+    it 'validates' do
+      expect(validator).to be_valid
     end
 
     context 'when contributors are present' do
@@ -77,11 +77,11 @@ RSpec.describe Datacite::Validators::AttributesValidator do
       end
 
       before do
-        props[:contributors] = contributors
+        attributes[:contributors] = contributors
       end
 
-      it 'does not raise' do
-        expect { validate }.not_to raise_error
+      it 'validates' do
+        expect(validator).to be_valid
       end
     end
 
@@ -100,62 +100,70 @@ RSpec.describe Datacite::Validators::AttributesValidator do
       end
 
       before do
-        props[:dates] = dates
+        attributes[:dates] = dates
       end
 
-      it 'does not raise' do
-        expect { validate }.not_to raise_error
+      it 'validates' do
+        expect(validator).to be_valid
       end
     end
 
     context 'when language is provided' do
       before do
-        props[:language] = 'en'
+        attributes[:language] = 'en'
       end
 
-      it 'does not raise' do
-        expect { validate }.not_to raise_error
+      it 'validates' do
+        expect(validator).to be_valid
       end
     end
 
     context 'when type is provided' do
       before do
-        props[:types] = {
+        attributes[:types] = {
           resourceTypeGeneral: 'Text',
           resourceType: 'Journal Article'
         }
       end
 
-      it 'does not raise' do
-        expect { validate }.not_to raise_error
+      it 'validates' do
+        expect(validator).to be_valid
       end
     end
   end
 
   context 'when required values are missing' do
-    before do
-      props.except!(:creators, :identifiers, :publicationYear, :publisher, :titles, :types)
+    let(:attributes) do
+      {
+        event: 'publish',
+        url: 'https://purl.stanford.edu/bb666bb1234',
+        schemaVersion: 'http://datacite.org/schema/kernel-4'
+      }
     end
 
-    it 'raises a validation error' do
-      expect do
-        validate
-      end.to raise_error(Datacite::ValidationError)
-        .with_message('object at root is missing required properties: identifiers, creators, ' \
-                      'titles, publisher, publicationYear, types')
+    it 'does not validate' do
+      expect(validator).not_to be_valid
+    end
+
+    it 'returns expected errors' do
+      validator.valid?
+      expect(validator.errors).to include('object at root is missing required properties: identifiers, creators, ' \
+                                          'titles, publisher, publicationYear, types')
     end
   end
 
   context 'when an invalid value is provided' do
     before do
-      props[:unkownProperty] = 'this is not valid'
+      attributes[:unkownProperty] = 'this is not valid'
     end
 
-    it 'raises a validation error' do
-      expect do
-        validate
-      end.to raise_error(Datacite::ValidationError)
-        .with_message('object property at `/unkownProperty` is a disallowed additional property')
+    it 'does not validate' do
+      expect(validator).not_to be_valid
+    end
+
+    it 'returns expected errors' do
+      validator.valid?
+      expect(validator.errors).to include('object property at `/unkownProperty` is a disallowed additional property')
     end
   end
 end
