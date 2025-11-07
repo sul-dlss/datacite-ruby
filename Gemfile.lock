@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datacite (0.7.0)
+    datacite (0.8.0)
       activesupport
       dry-monads (~> 1.3)
       faraday (~> 2.0)
