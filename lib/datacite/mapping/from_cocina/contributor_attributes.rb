@@ -145,7 +145,7 @@ module Datacite
             {
               nameIdentifier: identifier.value || identifier.uri,
               nameIdentifierScheme: identifier.type,
-              schemeURI: identifier.source.uri
+              schemeUri: identifier.source.uri
             }.compact
           end
         end
