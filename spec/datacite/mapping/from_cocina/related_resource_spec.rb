@@ -23,7 +23,7 @@ RSpec.describe Datacite::Mapping::FromCocina::RelatedResource do
         {
           relatedItemType: 'Other',
           titles: [
-            title: 'https://doi.org/10.1234/example.doi'
+            { title: 'https://doi.org/10.1234/example.doi' }
           ],
           relationType: 'IsReferencedBy',
           relatedItemIdentifier: {
@@ -55,7 +55,7 @@ RSpec.describe Datacite::Mapping::FromCocina::RelatedResource do
         {
           relatedItemType: 'Other',
           titles: [
-            title: 'https://arxiv.org/abs/1234.5678'
+            { title: 'https://arxiv.org/abs/1234.5678' }
           ],
           relationType: 'IsReferencedBy',
           relatedItemIdentifier: {
@@ -87,7 +87,7 @@ RSpec.describe Datacite::Mapping::FromCocina::RelatedResource do
         {
           relatedItemType: 'Other',
           titles: [
-            title: 'https://www.ncbi.nlm.nih.gov/pubmed/12345678'
+            { title: 'https://www.ncbi.nlm.nih.gov/pubmed/12345678' }
           ],
           relationType: 'IsReferencedBy',
           relatedItemIdentifier: {
@@ -121,7 +121,7 @@ RSpec.describe Datacite::Mapping::FromCocina::RelatedResource do
         {
           relatedItemType: 'Other',
           titles: [
-            title: 'Some Resource Title'
+            { title: 'Some Resource Title' }
           ],
           relationType: 'IsReferencedBy',
           relatedItemIdentifier: {

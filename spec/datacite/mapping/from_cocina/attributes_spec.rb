@@ -197,11 +197,11 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
                                 {
                                   type: 'deposit',
                                   date: [
-                                    value: '2022-01-01',
-                                    type: 'deposit',
-                                    encoding: {
-                                      code: 'w3cdtf'
-                                    }
+                                    { value: '2022-01-01',
+                                      type: 'deposit',
+                                      encoding: {
+                                        code: 'w3cdtf'
+                                      } }
                                   ],
                                   contributor: [
                                     {
