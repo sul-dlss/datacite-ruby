@@ -45,11 +45,11 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
             {
               type: 'deposit',
               date: [
-                value: '2022-01-01',
-                type: 'publication',
-                encoding: {
-                  code: 'w3cdtf'
-                }
+                { value: '2022-01-01',
+                  type: 'publication',
+                  encoding: {
+                    code: 'w3cdtf'
+                  } }
               ],
               contributor: [
                 {
