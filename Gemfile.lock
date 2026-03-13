@@ -32,7 +32,7 @@ GEM
     bigdecimal (4.0.1)
     byebug (13.0.0)
       reline (>= 0.6.0)
-    cocina-models (0.113.0)
+    cocina-models (0.114.0)
       activesupport
       deprecation
       dry-struct (~> 1.0)
