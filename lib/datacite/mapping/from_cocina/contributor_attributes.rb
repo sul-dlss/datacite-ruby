@@ -145,7 +145,7 @@ module Datacite
             {
               nameIdentifier: identifier.value || identifier.uri,
               nameIdentifierScheme: identifier.type,
-              schemeUri: identifier.source.uri
+              schemeUri: identifier.source&.uri
             }.compact
           end
         end
@@ -194,7 +194,7 @@ module Datacite
         def degree_committee_member?(cocina_contributor)
           cocina_contributor.role.any? { |contrib_role| contrib_role.value == 'degree committee member' } &&
             cocina_contributor.role.any? do |contrib_role|
-              contrib_role.code == 'ths' && contrib_role.source.code == 'marcrelator'
+              contrib_role.code == 'ths' && contrib_role.source&.code == 'marcrelator'
             end
         end
 
