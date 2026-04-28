@@ -90,6 +90,25 @@ RSpec.describe Datacite::Validators::CocinaValidator do
                     value: 'Woods Institute for the Environment'
                   }
                 ]
+              },
+              {
+                structuredValue: [
+                  {
+                    value: 'Stanford University',
+                    identifier: [
+                      {
+                        uri: 'https://ror.org/00f54p054',
+                        type: 'ROR',
+                        source: {
+                          code: 'ror'
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    value: 'Department of Molecular and Cellular Physiology'
+                  }
+                ]
               }
             ],
             note: [

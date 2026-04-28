@@ -111,7 +111,7 @@ module Datacite
           {
             nameType: 'Personal',
             nameIdentifiers: name_identifiers(cocina_contributor).presence,
-            affiliation: affiliations(cocina_contributor).presence
+            affiliation: affiliations(cocina_contributor).uniq { |affiliation| affiliation[:affiliationIdentifier] }.presence # rubocop:disable Layout/LineLength
           }.tap do |name_hash|
             # NOTE: This is needed for ETDs, for which we do not receive structured
             #       contributor names from Axess for ETD readers
