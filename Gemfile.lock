@@ -32,7 +32,7 @@ GEM
     bigdecimal (4.1.2)
     byebug (13.0.0)
       reline (>= 0.6.0)
-    cocina-models (0.121.0)
+    cocina-models (0.122.0)
       activesupport
       deprecation
       dry-struct (~> 1.0)
@@ -97,7 +97,7 @@ GEM
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     io-console (0.8.2)
-    json (2.19.8)
+    json (2.19.9)
     json_schemer (2.5.0)
       bigdecimal
       hana (~> 1.3)
