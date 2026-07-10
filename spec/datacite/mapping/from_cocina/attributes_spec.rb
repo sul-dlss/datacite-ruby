@@ -5,7 +5,6 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
   let(:cocina_object) do
     Cocina::Models::DRO.new(externalIdentifier: druid,
                             type: Cocina::Models::ObjectType.object,
-                            label: label,
                             version: 1,
                             description: {
                               contributor: [
@@ -334,7 +333,6 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
   let(:druid) { 'druid:bb666bb1234' }
   let(:doi) { "10.25740/#{druid.split(':').last}" }
   let(:purl) { "https://purl.stanford.edu/#{druid.split(':').last}" }
-  let(:label) { 'label' }
   let(:title) { 'title' }
   let(:apo_druid) { 'druid:pp000pp0000' }
   let(:url) { nil }

@@ -9,7 +9,6 @@ RSpec.describe Datacite::Mapping::FromCocina::Date do
   end
   let(:cocina_object) do
     Cocina::Models::DRO.new(type: Cocina::Models::ObjectType.object,
-                            label: 'This is my label',
                             version: 1,
                             administrative: { hasAdminPolicy: 'druid:dd999df4567' },
                             description: cocina_description,
