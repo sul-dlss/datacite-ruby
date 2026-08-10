@@ -39,26 +39,33 @@ module Datacite
           end&.value
         end
 
-        # @return [String] DataCite resourceType value
+        # @return [String, nil] DataCite resourceType value
         def resource_type
-          @resource_type ||= begin
-            self_deposit_form = Array(description.form).find { |cocina_form| self_deposit_form?(cocina_form) }
-
-            subtypes = self_deposit_subtypes(self_deposit_form)
-            if subtypes.blank?
-              self_deposit_type(self_deposit_form)
-            else
-              subtypes.select { |subtype| subtype if subtype != resource_type_general }.join('; ')
-            end
-          end
+          @resource_type ||= resource_type_from_subtypes || resource_type_from_type
         end
 
-        # call with cocina form element for Stanford self deposit resource types
-        # @return String the value from the structuredValue when the type is 'type' for the cocina form element
+        def resource_type_from_subtypes
+          subtypes = self_deposit_subtypes(self_deposit_form)
+          return if subtypes.blank?
+
+          subtypes.reject { |subtype| subtype == resource_type_general }.join('; ')
+        end
+
+        def resource_type_from_type
+          self_deposit_type(self_deposit_form) || self_deposit_form&.value
+        end
+
+        def self_deposit_form
+          @self_deposit_form ||= Array(description.form).find { |cocina_form| self_deposit_form?(cocina_form) }
+        end
+
+        # @param cocina_self_deposit_form [Cocina::Models::DescriptiveValue, nil] cocina form element for
+        #   Stanford self deposit resource types
+        # @return [String, nil] the value from the structuredValue when the type is 'type'
         def self_deposit_type(cocina_self_deposit_form)
-          cocina_self_deposit_form&.structuredValue&.each do |struct_val|
-            return struct_val.value if struct_val.type == 'type'
-          end
+          cocina_self_deposit_form&.structuredValue&.find do |struct_val|
+            struct_val.type == 'type'
+          end&.value
         end
 
         def self_deposit_subtypes(cocina_self_deposit_form)
