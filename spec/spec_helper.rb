@@ -14,7 +14,7 @@ end
 
 require 'datacite'
 require 'webmock/rspec'
-require 'byebug'
+require 'debug'
 require 'base64'
 require 'cocina/models'
 
