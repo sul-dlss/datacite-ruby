@@ -289,6 +289,13 @@ RSpec.describe Datacite::Validators::CocinaValidator do
                 type: 'type'
               }
             ]
+          },
+          {
+            type: 'resource type',
+            source: {
+              value: 'Stanford self-deposit resource types'
+            },
+            value: 'Data'
           }
         ],
         identifier: [
