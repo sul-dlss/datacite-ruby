@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+# This is used to validate if a cocina object will produce
+# a valid datacite payload
+# usage: bin/validate-cocina tmp/druid.json
+
 require 'bundler/setup'
 require 'datacite'
 require 'cocina/models'
