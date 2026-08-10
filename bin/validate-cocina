@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# This is used to validate if a cocina object will produce
+# a valid datacite payload
+# usage: bin/validate-cocina tmp/druid.json
+
+require 'bundler/setup'
+require 'datacite'
+require 'cocina/models'
+require 'json'
+
+if ARGV.empty?
+  warn "Usage: #{$PROGRAM_NAME} <path-to-cocina-json>"
+  exit 1
+end
+
+json_path = ARGV[0]
+
+unless File.exist?(json_path)
+  warn "File not found: #{json_path}"
+  exit 1
+end
+
+json = JSON.parse(File.read(json_path))
+cocina_object = Cocina::Models::DROWithMetadata.new(json)
+validator = Datacite::Validators::CocinaValidator.new(cocina_object: cocina_object)
+
+if validator.valid?
+  puts 'Valid!'
+else
+  puts 'Invalid:'
+  validator.errors.each { |error| puts "  - #{error}" }
+  exit 1
+end

@@ -117,6 +117,16 @@ validator = Datacite::Validators::AttributesValidator.new(attributes: datacite_a
 puts validator.errors.join(', ') unless validator.valid?
 ```
 
+## Validating cocina locally
+
+With cocina json saved from arge (append `.json` to an argo view URL and save the content locally) then run:
+
+```
+bin/validate-cocina path/to/file.json
+```
+
+This will result in either a `Valid!` message or an `Invalid!` message with a list of validation errors.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
