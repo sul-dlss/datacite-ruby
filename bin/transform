@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# This is used to review the transformation of a cocina object
+# to a datacite payload
+# usage: bin/transform tmp/druid.json
+
+require 'bundler/setup'
+require 'datacite'
+require 'cocina/models'
+require 'json'
+
+if ARGV.empty?
+  warn "Usage: #{$PROGRAM_NAME} <path-to-cocina-json>"
+  exit 1
+end
+
+json_path = ARGV[0]
+
+unless File.exist?(json_path)
+  warn "File not found: #{json_path}"
+  exit 1
+end
+
+json = JSON.parse(File.read(json_path))
+cocina_object = Cocina::Models::DROWithMetadata.new(json)
+attributes = Datacite::Mapping::FromCocina::Attributes.build(cocina_object:)
+
+puts JSON.pretty_generate(attributes)

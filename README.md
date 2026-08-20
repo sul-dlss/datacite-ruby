@@ -127,6 +127,16 @@ bin/validate-cocina path/to/file.json
 
 This will result in either a `Valid!` message or an `Invalid!` message with a list of validation errors.
 
+## Transforming cocina locally
+
+With cocina json saved from arge (append `.json` to an argo view URL and save the content locally) then run:
+
+```
+bin/transform path/to/file.json
+```
+
+This will output the formatted json content that would be sent to DataCite.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
