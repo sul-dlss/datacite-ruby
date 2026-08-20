@@ -129,7 +129,7 @@ This will result in either a `Valid!` message or an `Invalid!` message with a li
 
 ## Transforming cocina locally
 
-With cocina json saved from arge (append `.json` to an argo view URL and save the content locally) then run:
+With cocina json saved from Argo (append `.json` to an Argo view URL and save the content locally) then run:
 
 ```
 bin/transform path/to/file.json
