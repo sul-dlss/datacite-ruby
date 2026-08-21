@@ -13,19 +13,19 @@ module Datacite
           new(...).call
         end
 
-        def initialize(description:)
-          @description = description
+        def initialize(title:)
+          @title = title
         end
 
         # @return [Array<Hash>] list of titles for DataCite, conforming to the expectations of HTTP PUT request
         # to DataCite
         def call
-          [{ title: description.title.first.value }]
+          [{ title: }]
         end
 
         private
 
-        attr_reader :description
+        attr_reader :title
       end
     end
   end

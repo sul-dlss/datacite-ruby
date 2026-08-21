@@ -30,7 +30,7 @@ module Datacite
             event: 'publish',
             url: description.purl,
             identifiers: Identifiers.build(identification:),
-            titles: Titles.build(description:),
+            titles: Titles.build(title: cocina_display.full_title),
             publisher: { name: 'Stanford Digital Repository' }, # per DataCite schema
             publicationYear: publication_year,
             subjects: Subject.build(description:),
@@ -44,6 +44,10 @@ module Datacite
             relatedItems: related_items,
             schemaVersion: 'http://datacite.org/schema/kernel-4'
           }.merge(ContributorAttributes.build(description:)).compact
+        end
+
+        def cocina_display
+          @cocina_display ||= CocinaDisplay::CocinaRecord.from_json(cocina_object.to_json)
         end
 
         private

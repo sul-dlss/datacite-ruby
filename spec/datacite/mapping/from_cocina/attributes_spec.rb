@@ -352,7 +352,7 @@ RSpec.describe Datacite::Mapping::FromCocina::Attributes do
         ],
         titles: [
           {
-            title: 'title'
+            title: 'title.'
           }
         ],
         publisher: {
