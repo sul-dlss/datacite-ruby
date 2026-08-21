@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datacite (0.8.5)
+    datacite (0.8.6)
       activesupport
       cocina_display
       dry-monads (~> 1.3)
