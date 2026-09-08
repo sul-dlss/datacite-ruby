@@ -9,6 +9,7 @@ gemspec
 gem 'base64'
 gem 'cocina-models' # only used in tests
 gem 'debug'
+gem 'json', '~> 2.0' # Pinned until Faraday new release
 gem 'rake', '~> 13.0'
 gem 'rspec', '~> 3.0'
 gem 'rubocop', '~> 1.7'
