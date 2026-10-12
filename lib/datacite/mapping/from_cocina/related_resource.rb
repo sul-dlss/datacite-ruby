@@ -110,8 +110,8 @@ module Datacite
         end
 
         def related_item_title
-          @related_item_title ||= preferred_citation || other_title \
-            || related_item_doi || related_item_arxiv || related_item_pmid \
+          @related_item_title ||= preferred_citation || other_title
+            || related_item_doi || related_item_arxiv || related_item_pmid
             || related_item_identifier_url
         end
 
