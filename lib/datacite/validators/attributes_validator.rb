@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json_schemer'
-require 'pathname'
 
 module Datacite
   module Validators
