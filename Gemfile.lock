@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datacite (0.8.6)
+    datacite (0.8.7)
       activesupport
       base64
       cocina_display
