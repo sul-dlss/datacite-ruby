@@ -407,3 +407,14 @@ RSpec/MatchWithSimpleRegex: # new in 3.10
   Enabled: true
 RSpec/Output: # new in 3.9
   Enabled: true
+
+Lint/ArgumentMismatch: # new in 1.90
+  Enabled: true
+Lint/MisplacedMagicComment: # new in 1.91
+  Enabled: true
+Lint/SuperArgumentMismatch: # new in 1.90
+  Enabled: true
+Style/DirectiveScope: # new in 1.90
+  Enabled: true
+Style/TimeNow: # new in 1.90
+  Enabled: true
